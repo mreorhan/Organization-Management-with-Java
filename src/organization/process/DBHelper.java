@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author OGUZHAN
+ * @author OGUZHAN and MREORHAN
  */
 public final class DBHelper {
 
