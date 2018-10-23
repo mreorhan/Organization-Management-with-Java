@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public final class DBHelper {
 
-    private final String JBDC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost:3306/company";
+    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/company?autoReconnect=true&useSSL=false";
 
     private static final String USER = "root";
     private static final String PASSWORD = "";
@@ -28,16 +28,11 @@ public final class DBHelper {
     private Connection conn = null;
     private Statement stmt = null;
 
-    public static void main(String[] args) {
-        DBHelper dp = new DBHelper();
-        dp.open();
-        dp.test();
-        dp.close();
-    }
-
     public DBHelper() {
+        System.out.println("ADasdasdasd");
         try {
-            Class.forName("JDBC_DRIVER");
+            Class.forName(JDBC_DRIVER);
+            System.out.println("Aaaaaa");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,8 +41,8 @@ public final class DBHelper {
     public void open() {
         try {
             //System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            //System.out.println("Creating statement...");
+            System.out.println("Creating statement...");
+            conn = DriverManager.getConnection(DB_URL, USER,PASSWORD);
             stmt = conn.createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,8 +68,8 @@ public final class DBHelper {
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Display values
-                System.out.print(rs.getString(1));
-                System.out.print(rs.getString(2));
+                System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6));
+                
             }
             //STEP 6: Clean-up environment
             rs.close();

@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package organization.managment;
+package organization.management;
+import organization.process.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
  *
  * @author OGUZHAN
  */
-public class OrganizationManagment extends Application {
+public class OrganizationManagament extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,6 +26,13 @@ public class OrganizationManagment extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+        System.out.println("ASaslfasföasf");
+        DBHelper dp = new DBHelper();
+        dp.open();
+        dp.test();
+        dp.close();
+        
     }
 
     /**
