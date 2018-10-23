@@ -3,20 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainclasses;
+package organization.process;
 
 import java.util.Date;
 
 /**
  *
- * @author Emre
+ * @author OGUZHAN
  */
 public class Person {
-    
     private String name;
     private String lastName;
-    private int personID;
-    private Date birthdayDate;
+    private Date birtDate;
+    private long ID;
+
+    public Person(String name, String lastName, Date birtDate, long ID) {
+        this.name = name;
+        this.lastName = lastName;
+        this.birtDate = birtDate;
+        this.ID = ID;
+    }
 
     public String getName() {
         return name;
@@ -34,20 +40,21 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public int getPersonID() {
-        return personID;
+    public Date getBirtDate() {
+        return birtDate;
     }
 
-    public void setPersonID(int personID) {
-        this.personID = personID;
+    public void setBirtDate(Date birtDate) {
+        this.birtDate = birtDate;
     }
 
-    public Date getBirthdayDate() {
-        return birthdayDate;
+    public long getID() {
+        return ID;
     }
 
-    public void setBirthdayDate(Date birthdayDate) {
-        this.birthdayDate = birthdayDate;
+    public void setID(long ID) {
+        this.ID = ID;
     }
+    
     
 }
