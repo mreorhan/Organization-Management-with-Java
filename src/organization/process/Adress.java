@@ -19,7 +19,7 @@ public class Adress {
         this.postCode = postCode;
         this.country = country;
         this.province = province;
-        this.street = street;
+        this.street = street;       
     }
 
     public int getPostCode() {

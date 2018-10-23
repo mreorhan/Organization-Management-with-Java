@@ -14,8 +14,8 @@ import java.util.Date;
 public class Personnel extends Person{
     
     //Inheritance Constructure
-    public Personnel(String name, String lastName, Date birtDate, long ID) {
-        super(name, lastName, birtDate, ID);
+    public Personnel(String name, String lastName, Date birthDate) {
+        super(name, lastName, birthDate);
     }
     
     //Variables

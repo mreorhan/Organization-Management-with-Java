@@ -14,13 +14,13 @@ import java.util.Date;
 public class Person {
     private String name;
     private String lastName;
-    private Date birtDate;
+    private Date birthDate;
     private long ID;
 
-    public Person(String name, String lastName, Date birtDate, long ID) {
+    public Person(String name, String lastName, Date birtDate) {
         this.name = name;
         this.lastName = lastName;
-        this.birtDate = birtDate;
+        this.birthDate = birtDate;
         this.ID = ID;
     }
 
@@ -40,12 +40,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getBirtDate() {
-        return birtDate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirtDate(Date birtDate) {
-        this.birtDate = birtDate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public long getID() {
