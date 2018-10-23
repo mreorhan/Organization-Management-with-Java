@@ -20,19 +20,66 @@ import java.util.logging.Logger;
 public final class DBHelper {
 
     private final String JBDC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost/company";
+    private final String DB_URL = "jdbc:mysql://localhost:3306/company";
 
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
     private Connection conn = null;
     private Statement stmt = null;
-    
-    public DBHelper(){
-        try{
+
+    public static void main(String[] args) {
+        DBHelper dp = new DBHelper();
+        dp.open();
+        dp.test();
+        dp.close();
+    }
+
+    public DBHelper() {
+        try {
             Class.forName("JDBC_DRIVER");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void open() {
+        try {
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void close() {
+        try {
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void test() {
+        try {
+            String sql;
+            sql = "SELECT * FROM person";
+            ResultSet rs = stmt.executeQuery(sql); // DML
+            // stmt.executeUpdate(sql); // DDL
+
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Display values
+                System.out.print(rs.getString(1));
+                System.out.print(rs.getString(2));
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
