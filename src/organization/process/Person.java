@@ -15,13 +15,30 @@ public class Person {
     private String name;
     private String lastName;
     private Date birthDate;
-    private long ID;
+    private String username;
+    private String password;
+    private int PersonID;
 
     public Person(String name, String lastName, Date birtDate) {
         this.name = name;
         this.lastName = lastName;
         this.birthDate = birtDate;
-        this.ID = ID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -48,12 +65,12 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public long getID() {
-        return ID;
+    public long getPersonID() {
+        return PersonID;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void setPersonID(int PersonID) {
+        this.PersonID = PersonID;
     }
     
     

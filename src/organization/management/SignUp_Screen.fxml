@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.SignUp_ScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="organization.management.SignUp_ScreenController">
     <stylesheets>
-        <URL value="@signup_screen.css"/>
+        <URL value="@signup_screen.css" />
     </stylesheets>
+   <children>
+      <JFXTextArea layoutX="99.0" layoutY="25.0" />
+      <JFXButton layoutX="208.0" layoutY="257.0" prefHeight="36.0" prefWidth="95.0" />
+   </children>
 </AnchorPane>

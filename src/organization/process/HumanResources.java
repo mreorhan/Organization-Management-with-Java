@@ -34,7 +34,7 @@ public class HumanResources {
     
     public int EmployeeControl(Personnel personnel){
         for(int i=0;i<personnels.size();i++ ){
-            if(personnel.getID() == personnels.get(i).getID())
+            if(personnel.getPersonID() == personnels.get(i).getPersonID())
                 return i;
         }
         return  -1;
