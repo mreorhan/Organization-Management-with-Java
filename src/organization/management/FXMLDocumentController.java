@@ -5,6 +5,8 @@
  */
 package organization.management;
 
+import organization.process.*;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -49,7 +51,11 @@ public class FXMLDocumentController implements Initializable {
     private void loginClickAction(ActionEvent event) {
         String username = txt_username.getText();
         String password = txt_password.getText();
-        System.out.println(username +","+password);
+        DBHelper db= new DBHelper();
+        db.open();
+        boolean user = db.UserControl(username, password);
+        System.out.println(user);
+        db.close();
     }
 
     @FXML

@@ -26,8 +26,8 @@ public final class DBHelper {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    private Connection conn = null;
-    private Statement stmt = null;
+    private  Connection conn = null;
+    private  Statement stmt = null;
 
     public DBHelper() {
         try {
@@ -128,5 +128,27 @@ public final class DBHelper {
         }
 
         return -1;
+    }
+    
+    public  boolean UserControl(String username, String password){
+        try {
+            String sql;
+            sql = "SELECT * FROM person";
+            ResultSet rs = stmt.executeQuery(sql); // DML
+            // stmt.executeUpdate(sql); // DDL
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Display values
+                if (rs.getString(5).equals(username) && rs.getString(6).equals(password) ) {
+                    return true;
+                }
+
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return false;
     }
 }
