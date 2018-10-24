@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/OGUZHAN/Documents/GitHub/Organization-Management-with-Java/src/organization/management/OrganizationManagament.java</file>
+=======
+            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/FXMLDocumentController.java</file>
+            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/FXMLDocument.fxml</file>
+>>>>>>> c9b4835ed4a0ce45b2d2b17ed032dd4a1321dbc4
         </group>
     </open-files>
 </project-private>
