@@ -5,12 +5,18 @@
  */
 package organization.management;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -19,17 +25,24 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private JFXPasswordField txt_password;
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    private JFXTextField txt_username;
+    @FXML
+    private JFXButton btn_fotgotpassword;
+    @FXML
+    private JFXButton btn_login;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+    @FXML
+    private void loginClickAction(ActionEvent event) {
+        String username = txt_username.getText();
+        String password = txt_password.getText();
+        System.out.println(username +","+password);
+    }
+
     
 }
