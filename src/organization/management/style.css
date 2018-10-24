@@ -1,0 +1,15 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.footer-text{
+     -fx-font-size: 15.0;
+}
+.seperator {
+-fx-border-color: transparent red transparent transparent;
+ -fx-background: #e6e6e6;
+}
+.jfx-date-picker > .jfx-text-field {
+    -jfx-label-float: true;
+    -fx-font-size: 16.0;
+}

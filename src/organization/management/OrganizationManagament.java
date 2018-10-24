@@ -24,10 +24,10 @@ public class OrganizationManagament extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp_Screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SignIn_Screen.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("Software Company Management");
         stage.setScene(scene);
         stage.show();
         

@@ -20,9 +20,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import organization.process.*;
 
 /**
@@ -37,15 +41,17 @@ public class SignUp_ScreenController implements Initializable {
     @FXML
     private JFXTextField txt_username;
     @FXML
-    private JFXButton btn_signUp;
-    @FXML
-    private Label lbl_register;
-    @FXML
     private JFXTextField txt_name;
     @FXML
     private JFXTextField txt_lastName;
     @FXML
     private JFXDatePicker txt_birthDay;
+    @FXML
+    private JFXButton btn_signIn;
+    @FXML
+    private Label lbl_register;
+    @FXML
+    private Label lbl_Message;
 
     /**
      * Initializes the controller class.
@@ -55,7 +61,6 @@ public class SignUp_ScreenController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void signUpClickAction(ActionEvent event) throws ParseException {
     String string = txt_birthDay.getValue().toString();
     DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
@@ -72,13 +77,50 @@ public class SignUp_ScreenController implements Initializable {
         dp.open();
         
         
-        dp.Insert(p1);
-        dp.test();
+       
+        if(dp.Insert(p1)){
+            //Yeni formu açmak için kullanıyoruz
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Dashboard_Screen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));  
+        stage.show();
+        }catch(Exception e){
+            System.out.println("This form not working"+e);
+        }
+        }
+        
         dp.close();
     }
 
+
     @FXML
-    private void signUpClick(MouseEvent event) {
+    private void signIn(ActionEvent event) {
+        //Yeni formu açmak için kullanıyoruz
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignIn_Screen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));  
+        stage.show();
+        }catch(Exception e){
+            System.out.println("This form not working"+e);
+        }
+    }
+
+    @FXML
+    private void signUp(MouseEvent event) {
+        //Yeni formu açmak için kullanıyoruz
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignIn_Screen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));  
+        stage.show();
+        }catch(Exception e){
+            System.out.println("This form not working"+e);
+        }
     }
     
 }

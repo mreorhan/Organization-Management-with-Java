@@ -8,28 +8,34 @@ package organization.management;
 import organization.process.*;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 /**
  *
  * @author OGUZHAN
  */
 public class SignIn_ScreenController implements Initializable {
-    
     
     @FXML
     private JFXPasswordField txt_password;
@@ -41,6 +47,8 @@ public class SignIn_ScreenController implements Initializable {
     private JFXButton btn_fotgotpassword;
     @FXML
     private JFXButton btn_login;
+    @FXML
+    private Label lbl_Message;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,17 +61,34 @@ public class SignIn_ScreenController implements Initializable {
         DBHelper db= new DBHelper();
         db.open();
         boolean user = db.UserControl(username, password);
-        System.out.println(user);
+         if(user){
+            //Yeni formu açmak için kullanıyoruz
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Dashboard_Screen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));  
+        stage.show();
+        }catch(Exception e){
+            System.out.println("This form not working"+e);
+        }
+        }
+        else {
+             lbl_Message.setText("Error");
+        }
         db.close();
     }
-
     @FXML
-    private void signUpClick(MouseEvent event)  throws  Exception{
-        /*
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("SignUp_screen.fxml"));
-        rootPane.getChildren().setAll(pane);
-        System.err.println("ok");*/
+    private void signUpClick(MouseEvent event) {
+        
+         try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignUp_Screen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));  
+        stage.show();
+        }catch(Exception e){
+            System.out.println("Cant load");
+        }
     }
-
-    
 }
