@@ -8,6 +8,7 @@ package organization.management;
 import organization.process.*;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -27,21 +28,19 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author OGUZHAN
  */
-public class FXMLDocumentController implements Initializable {
+public class SignIn_ScreenController implements Initializable {
     
-    @FXML
-    private AnchorPane rootPane;
     
     @FXML
     private JFXPasswordField txt_password;
     @FXML
     private JFXTextField txt_username;
     @FXML
+    private Label lbl_register;
+    @FXML
     private JFXButton btn_fotgotpassword;
     @FXML
     private JFXButton btn_login;
-    @FXML
-    private Label lbl_register;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,9 +59,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void signUpClick(MouseEvent event)  throws  Exception{
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("SignUp_screen.fxml"));
+        /*
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("SignUp_screen.fxml"));
         rootPane.getChildren().setAll(pane);
-        System.err.println("ok");
+        System.err.println("ok");*/
     }
 
     

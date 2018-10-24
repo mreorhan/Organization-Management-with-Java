@@ -24,7 +24,7 @@ public class OrganizationManagament extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SignUp_Screen.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -43,6 +43,7 @@ public class OrganizationManagament extends Application {
         Person p1 = new Person("Ahmet", "Sağlam", tarih);
         p1.setUsername("ahmet");
         p1.setPassword("1234");
+        
             
         DBHelper dp = new DBHelper();
         dp.open();
