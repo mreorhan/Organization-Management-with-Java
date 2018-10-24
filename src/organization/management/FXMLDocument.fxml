@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #dfe6e9;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="organization.management.FXMLDocumentController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #dfe6e9;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.FXMLDocumentController">
     <children>
       <JFXPasswordField fx:id="txt_password" focusColor="#0073cf" layoutX="369.0" layoutY="178.0" prefHeight="28.0" prefWidth="190.0" promptText="Password">
          <font>
@@ -18,7 +18,7 @@
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btn_fotgotpassword" layoutX="251.0" layoutY="234.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
+      <JFXButton fx:id="btn_fotgotpassword" layoutX="250.0" layoutY="234.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
       <JFXButton fx:id="btn_login" layoutX="423.0" layoutY="234.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
     </children>
 </AnchorPane>
