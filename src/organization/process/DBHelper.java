@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +59,7 @@ public final class DBHelper {
         }
     }
 
-    public void test() {
+     public void test() {
         try {
             String sql;
             sql = "SELECT * FROM person";
@@ -75,6 +77,27 @@ public final class DBHelper {
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String[] _getDBData(String tableName,String columnName) {
+        List<String> list = new ArrayList<String>();
+        try {
+            String sql;
+            sql = "SELECT * FROM "+tableName;
+            ResultSet rs = stmt.executeQuery(sql); 
+            while (rs.next()) {
+               list.add(rs.getString(columnName));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[] array= new String[list.size()];
+        for(int i=0;i<=list.size();i++){
+            array[i]=list.get(i);
+    }
+            
+        return array;
     }
 
     public boolean Insert(Personnel p) {

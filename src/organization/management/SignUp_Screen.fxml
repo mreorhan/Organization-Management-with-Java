@@ -37,7 +37,7 @@
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_signIn" layoutX="211.0" layoutY="316.0" onAction="#signIn" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign in" textFill="WHITE" />
+      <JFXButton fx:id="btn_signUp" layoutX="211.0" layoutY="316.0" onAction="#signUpEvent" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign Up" textFill="WHITE" />
       
       <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUp" styleClass="footer-text" stylesheets="@style.css" text="Sign Up" />
       <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />

@@ -47,11 +47,11 @@ public class SignUp_ScreenController implements Initializable {
     @FXML
     private JFXDatePicker txt_birthDay;
     @FXML
-    private JFXButton btn_signIn;
-    @FXML
     private Label lbl_register;
     @FXML
     private Label lbl_Message;
+    @FXML
+    private JFXButton btn_signUp;
 
     /**
      * Initializes the controller class.
@@ -62,12 +62,29 @@ public class SignUp_ScreenController implements Initializable {
     }    
 
     private void signUpClickAction(ActionEvent event) throws ParseException {
-    String string = txt_birthDay.getValue().toString();
-    DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-    Date date = format.parse(string);
-    System.out.println(date); // Sat Jan 02 00:00:00 GMT 2010
+   
+    }
 
-        Person p1 = new Person(txt_name.getText(),txt_lastName.getText(),date);
+
+    private void signIn(ActionEvent event) {
+        //Yeni formu açmak için kullanıyoruz
+        CommonFunction fo=new CommonFunction();
+        fo._show("SignIn_Screen.fxml");
+    }
+
+    @FXML
+    private void signUp(MouseEvent event) {
+        //Yeni formu açmak için kullanıyoruz
+         CommonFunction fo=new CommonFunction();
+        fo._show("SignIn_Screen.fxml");
+    }
+
+    @FXML
+    private void signUpEvent(ActionEvent event) throws ParseException{
+        String string = txt_birthDay.getValue().toString();
+        CommonFunction fa = new CommonFunction();
+        
+        Person p1 = new Person(txt_name.getText(),txt_lastName.getText(), fa._formatDate(string));
         p1.setUsername(txt_username.getText());
         p1.setPassword(txt_password.getText());
         System.out.println(txt_password.getText());
@@ -80,47 +97,13 @@ public class SignUp_ScreenController implements Initializable {
        
         if(dp.Insert(p1)){
             //Yeni formu açmak için kullanıyoruz
-        try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Dashboard_Screen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        }catch(Exception e){
-            System.out.println("This form not working"+e);
+         CommonFunction fo=new CommonFunction();
+        fo._show("Create_New_Employee_Screen.fxml");
         }
-        }
+        else
+            System.out.println("insert not working ");
         
         dp.close();
-    }
-
-
-    @FXML
-    private void signIn(ActionEvent event) {
-        //Yeni formu açmak için kullanıyoruz
-        try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignIn_Screen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        }catch(Exception e){
-            System.out.println("This form not working"+e);
-        }
-    }
-
-    @FXML
-    private void signUp(MouseEvent event) {
-        //Yeni formu açmak için kullanıyoruz
-        try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignIn_Screen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        }catch(Exception e){
-            System.out.println("This form not working"+e);
-        }
     }
     
 }

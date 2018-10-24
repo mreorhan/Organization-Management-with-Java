@@ -63,15 +63,8 @@ public class SignIn_ScreenController implements Initializable {
         boolean user = db.UserControl(username, password);
          if(user){
             //Yeni formu açmak için kullanıyoruz
-        try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Dashboard_Screen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        }catch(Exception e){
-            System.out.println("This form not working"+e);
-        }
+         CommonFunction fo=new CommonFunction();
+        fo._show("Dashboard_Screen.fxml");
         }
         else {
              lbl_Message.setText("Error");
@@ -80,15 +73,8 @@ public class SignIn_ScreenController implements Initializable {
     }
     @FXML
     private void signUpClick(MouseEvent event) {
-        
-         try{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignUp_Screen.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));  
-        stage.show();
-        }catch(Exception e){
-            System.out.println("Cant load");
-        }
+        CommonFunction fo=new CommonFunction();
+        fo._show("SignUp_Screen.fxml");
     }
+    
 }

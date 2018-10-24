@@ -3,33 +3,57 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.SignIn_ScreenController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="organization.management.SignIn_ScreenController">
     <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Sign In" textAlignment="CENTER" textFill="#616060">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Sign In" textAlignment="CENTER" textFill="#616060" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_username" focusColor="#0073cf" labelFloat="true" layoutX="146.0" layoutY="177.0" prefHeight="30.0" prefWidth="190.0" promptText="Username">
+      <Label fx:id="lbl_Message" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="18.0" prefWidth="700.0" style="color: red;" textAlignment="CENTER" />
+      <BorderPane layoutY="335.0" prefHeight="47.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <left>
+            <Label fx:id="lbl_register" onMouseClicked="#signUpClick" styleClass="footer-text" stylesheets="@style.css" text="Sign Up" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+            </Label>
+         </left>
+         <right>
+            <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="82.0" styleClass="footer-text" stylesheets="@style.css" text="2018 ©" textAlignment="RIGHT" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+            </Label>
+         </right>
+         <top>
+            <Separator prefHeight="0.0" prefWidth="672.0" stylesheets="@style.css" BorderPane.alignment="CENTER" />
+         </top>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+      </BorderPane>
+      <JFXTextField fx:id="txt_username" focusColor="#0073cf" labelFloat="true" layoutX="150.0" layoutY="172.0" prefHeight="30.0" prefWidth="190.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="txt_password" focusColor="#0073cf" labelFloat="true" layoutX="369.0" layoutY="178.0" prefHeight="28.0" prefWidth="190.0" promptText="Password">
+      <JFXPasswordField fx:id="txt_password" focusColor="#0073cf" labelFloat="true" layoutX="383.0" layoutY="172.0" prefHeight="28.0" prefWidth="190.0" promptText="Password">
          <font>
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_login" layoutX="442.0" layoutY="240.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Login" textFill="WHITE" />
-      <JFXButton fx:id="btn_fotgotpassword" layoutX="269.0" layoutY="240.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" AnchorPane.topAnchor="240.0" />
-      <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUpClick" styleClass="footer-text" stylesheets="@style.css" text="Sign Up" />
-      <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />
-      <Label alignment="CENTER_RIGHT" layoutX="600.0" layoutY="417.0" prefHeight="18.0" prefWidth="82.0" styleClass="footer-text" stylesheets="@style.css" text="2018 ©" textAlignment="RIGHT" />
-      <Label fx:id="lbl_Message" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="18.0" prefWidth="700.0" style="color: red;" textAlignment="CENTER" />
+      <JFXButton fx:id="btn_fotgotpassword" layoutX="279.0" layoutY="235.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
+      <JFXButton fx:id="btn_login" layoutX="454.0" layoutY="235.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Login" textFill="WHITE" />
     </children>
 </AnchorPane>
