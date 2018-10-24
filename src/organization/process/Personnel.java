@@ -19,25 +19,25 @@ public class Personnel extends Person{
     }
     
     //Variables
-    private DepartmentType department;
-    private JobType job;
+    private int departmentID;
+    private int jobID;
     private double salary;
-    private Date dateOfEmployment;
+    private Date recruitmentDate;
 
-    public DepartmentType getDepartment() {
-        return department;
+    public int getDepartmentID() {
+        return departmentID;
     }
 
-    public void setDepartment(DepartmentType department) {
-        this.department = department;
+    public void setDepartmentID(int departmentID) {
+        this.departmentID = departmentID;
     }
 
-    public JobType getJob() {
-        return job;
+    public int getJobID() {
+        return jobID;
     }
 
-    public void setJob(JobType job) {
-        this.job = job;
+    public void setJobID(int jobID) {
+        this.jobID = jobID;
     }
 
     public double getSalary() {
@@ -48,12 +48,12 @@ public class Personnel extends Person{
         this.salary = salary;
     }
 
-    public Date getDateOfEmployment() {
-        return dateOfEmployment;
+    public Date getRecruitmentDate() {
+        return recruitmentDate;
     }
 
-    public void setDateOfEmployment(Date dateOfEmployment) {
-        this.dateOfEmployment = dateOfEmployment;
+    public void setRecruitmentDate(Date recruitmentDate) {
+        this.recruitmentDate = recruitmentDate;
     }
 
 }
