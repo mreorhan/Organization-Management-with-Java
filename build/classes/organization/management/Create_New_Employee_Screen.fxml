@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Create_New_Employee_ScreenController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" styleClass="body" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Create_New_Employee_ScreenController">
      <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Create a new Employee" textAlignment="CENTER" textFill="#616060">
          <font>
@@ -28,8 +28,8 @@
       <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />
       <Label alignment="CENTER_RIGHT" layoutX="600.0" layoutY="417.0" prefHeight="18.0" prefWidth="82.0" styleClass="footer-text" stylesheets="@style.css" text="2018 ©" textAlignment="RIGHT" />
       <Label fx:id="lbl_Message" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="18.0" prefWidth="700.0" style="color: red;" textAlignment="CENTER" />
-      <JFXComboBox fx:id="cb_department" layoutX="144.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Department" />
-      <JFXComboBox fx:id="cb_job" layoutX="367.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Job" />
+      <JFXComboBox fx:id="cb_department" labelFloat="true" layoutX="144.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Department" />
+      <JFXComboBox fx:id="cb_job" labelFloat="true" layoutX="367.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Job" />
     
 
     </children>

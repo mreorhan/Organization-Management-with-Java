@@ -1,9 +1,6 @@
 /*
  * Empty Stylesheet file.
  */
-body{
-    -fx-background-color: #fff;
-}
 .footer-text{
      -fx-font-size: 15.0;
 }
@@ -11,7 +8,17 @@ body{
 -fx-border-color: transparent red transparent transparent;
  -fx-background: #e6e6e6;
 }
+
+.seperator2 {
+-fx-border-color: transparent red transparent transparent;
+ -fx-background: red;
+ border-bottom: 4px;
+}
 .jfx-date-picker > .jfx-text-field {
+    -jfx-label-float: true;
+    -fx-font-size: 16.0;
+}
+.jfx-combo-box  {
     -jfx-label-float: true;
     -fx-font-size: 16.0;
 }
@@ -19,9 +26,23 @@ body{
    -fx-background-repeat: no-repeat;
   -fx-background-position: left;
   -fx-background-size: 32px;
-  -fx-background-position: 20px
+  -fx-background-position: 10px;
+ 
+}
+.dashboard-menu-button-padding{
+     -fx-padding:0 0 0 50px;
 }
 .button-products {
   -fx-background-image: url('../../assets/product-60.png');
+}
 
+.body {
+    -fx-background-color: #fff;
+}
+
+.dashboard-right-icon{
+   -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-background-size: 32px;
+  -fx-background-image: url('../../assets/logout-50.png');
 }

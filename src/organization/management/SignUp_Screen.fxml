@@ -21,25 +21,25 @@
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_lastName" focusColor="#0073cf" labelFloat="true" layoutX="369.0" layoutY="95.0" prefHeight="30.0" prefWidth="190.0" promptText="Last Name">
+      <JFXTextField fx:id="txt_lastName" focusColor="#0073cf" labelFloat="true" layoutX="370.0" layoutY="95.0" prefHeight="30.0" prefWidth="190.0" promptText="Last Name">
          <font>
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="txt_birthDay" defaultColor="#0073cf" layoutX="144.0" layoutY="169.0" prefHeight="38.0" prefWidth="190.0" promptText="Birthday" />
-      <JFXTextField fx:id="txt_username" focusColor="#0073cf" labelFloat="true" layoutX="144.0" layoutY="262.0" prefHeight="30.0" prefWidth="190.0" promptText="Username">
+      <JFXDatePicker fx:id="txt_birthDay" defaultColor="#0073cf" layoutX="146.0" layoutY="170.0" prefHeight="38.0" prefWidth="190.0" promptText="Birthday" />
+      <JFXTextField fx:id="txt_username" focusColor="#0073cf" labelFloat="true" layoutX="146.0" layoutY="263.0" prefHeight="30.0" prefWidth="190.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="txt_password" focusColor="#0073cf" labelFloat="true" layoutX="367.0" layoutY="263.0" prefHeight="28.0" prefWidth="190.0" promptText="Password">
+      <JFXPasswordField fx:id="txt_password" focusColor="#0073cf" labelFloat="true" layoutX="370.0" layoutY="264.0" prefHeight="28.0" prefWidth="190.0" promptText="Password">
          <font>
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_signUp" layoutX="211.0" layoutY="316.0" onAction="#signUpEvent" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign Up" textFill="WHITE" />
+      <JFXButton fx:id="btn_signUp" layoutX="443.0" layoutY="314.0" onAction="#signUpEvent" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign Up" textFill="WHITE" />
       
-      <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUp" styleClass="footer-text" stylesheets="@style.css" text="Sign Up" />
+      <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUp" styleClass="footer-text" stylesheets="@style.css" text="Sign In" />
       <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />
       <Label alignment="CENTER_RIGHT" layoutX="600.0" layoutY="417.0" prefHeight="18.0" prefWidth="82.0" styleClass="footer-text" stylesheets="@style.css" text="2018 ©" textAlignment="RIGHT" />
       <Label fx:id="lbl_Message" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="18.0" prefWidth="700.0" style="color: red;" textAlignment="CENTER" />
