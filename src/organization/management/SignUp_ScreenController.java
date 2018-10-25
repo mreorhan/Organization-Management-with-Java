@@ -10,23 +10,13 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import organization.process.*;
 
 /**
@@ -59,51 +49,49 @@ public class SignUp_ScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-    private void signUpClickAction(ActionEvent event) throws ParseException {
-   
     }
 
+    private void signUpClickAction(ActionEvent event) throws ParseException {
+
+    }
 
     private void signIn(ActionEvent event) {
         //Yeni formu açmak için kullanıyoruz
-        CommonFunction fo=new CommonFunction();
+        CommonFunction fo = new CommonFunction();
         fo._show("SignIn_Screen.fxml");
     }
 
     @FXML
     private void signUp(MouseEvent event) {
         //Yeni formu açmak için kullanıyoruz
-         CommonFunction fo=new CommonFunction();
+        CommonFunction fo = new CommonFunction();
         fo._show("SignIn_Screen.fxml");
     }
 
     @FXML
-    private void signUpEvent(ActionEvent event) throws ParseException{
+    private void signUpEvent(ActionEvent event) throws ParseException {
+        DBHelper db = new DBHelper();
+        db.open();
+        
+        
         String string = txt_birthDay.getValue().toString();
         CommonFunction fa = new CommonFunction();
-        
-        Person p1 = new Person(txt_name.getText(),txt_lastName.getText(), fa._formatDate(string));
+
+        Person p1 = new Person(txt_name.getText(), txt_lastName.getText(), fa._formatDate(string));
         p1.setUsername(txt_username.getText());
         p1.setPassword(txt_password.getText());
-        System.out.println(txt_password.getText());
-        
-        
-        DBHelper dp = new DBHelper();
-        dp.open();
-        
-        
-       
-        if(dp.Insert(p1)){
+
+        if (db.Insert(p1)) {
             //Yeni formu açmak için kullanıyoruz
-         CommonFunction fo=new CommonFunction();
-        fo._show("Create_New_Employee_Screen.fxml");
-        }
-        else
+            p1.setPersonID(db.ReturnID(p1));
+            InstantData.person = p1;
+            CommonFunction fo = new CommonFunction();
+            fo._show("Create_New_Employee_Screen.fxml");
+        } else {
             System.out.println("insert not working ");
-        
-        dp.close();
+        }
+
+        db.close();
     }
-    
+
 }
