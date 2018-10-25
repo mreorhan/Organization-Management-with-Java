@@ -51,26 +51,21 @@ public class Create_New_Employee_ScreenController implements Initializable {
     }
 
     public void ComboBoxLoad() {
-            String[] array=null;
+            String[] array_department =null;
+            String[] array_job =null;
             DBHelper db = new DBHelper();
             db.open();
-            try{
-            array = db._getDBData("departmenttype", "DepartmentName");
-            }catch (Exception e){
-                System.out.println(e);
-                
-            }
-
-            //cb_department.getItems().addAll(db._getDBData("departmenttype","DepartmentName"));
+            array_department = db._getDBData("departmenttype", "DepartmentName");
+            array_job = db._getDBData("jobtype","");
             db.close();
             // TODO: çekilecek veriler -job-  aşağıdaki gibi eklenecek
-            cb_department.getItems().addAll(array);
-           
-        
+            cb_department.getItems().addAll(array_department);
+            cb_job.getItems().addAll(array_job);
     }
 
     @FXML
     private void signUp(MouseEvent event) {
+        System.out.println("ifü"+cb_job.getValue());
     }
 
     @FXML
