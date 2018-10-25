@@ -3,32 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/OGUZHAN/Documents/GitHub/Organization-Management-with-Java/src/organization/process/DBHelper.java</file>
             <file>file:/C:/Users/OGUZHAN/Documents/GitHub/Organization-Management-with-Java/src/organization/management/OrganizationManagament.java</file>
             <file>file:/C:/Users/OGUZHAN/Documents/GitHub/Organization-Management-with-Java/src/organization/management/Create_New_Employee_ScreenController.java</file>
-=======
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Company.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignUp_Screen.fxml</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Dashboard_ScreenController.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/OrganizationManagament.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/style.css</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Create_New_Employee_Screen.fxml</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/DBHelper.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Create_New_Employee_ScreenController.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Person.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignIn_ScreenController.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignIn_Screen.fxml</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignUp_ScreenController.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Personnel.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/HumanResources.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/CommonFunction.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Adress.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Dashboard_Screen.fxml</file>
-<<<<<<< HEAD
->>>>>>> 50167397cbc8da392a2985989631309441701d1f
-=======
->>>>>>> 50167397cbc8da392a2985989631309441701d1f
         </group>
     </open-files>
 </project-private>

@@ -79,7 +79,7 @@ public final class DBHelper {
         }
     }
     
-    public String[] _getDBData(String tableName,String columnName){
+    public String[] _getDBData(String tableName){
         List<String> list = new ArrayList<String>();
         try {
             String sql;
@@ -117,7 +117,7 @@ public final class DBHelper {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     public boolean Insert(Person p) {
@@ -132,7 +132,7 @@ public final class DBHelper {
         return true;
     }
 
-    public int SelectPersonID(Person p) {
+    public int ReturnID(Person p) {
         int i = 0;
         try {
 
@@ -144,7 +144,31 @@ public final class DBHelper {
             while (rs.next()) {
                 //Display values
                 if (rs.getString(5).equals(p.getUsername()) ) {
-                    System.out.println("Deneme 3");
+                    return rs.getInt(1);
+                }
+
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+        } catch (SQLException ex) {
+            return -1;
+        }
+
+        return -1;
+    }
+    
+    public int ReturnID(String tableName,String findName) {
+        int i = 0;
+        try {
+
+            String sql;
+            sql = "SELECT * FROM "+ tableName;
+            ResultSet rs = stmt.executeQuery(sql); // DML
+            // stmt.executeUpdate(sql); // DDL
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Display values
+                if (rs.getString(2).equals(findName) ) {
                     return rs.getInt(1);
                 }
 
