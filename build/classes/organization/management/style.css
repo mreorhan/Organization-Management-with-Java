@@ -1,7 +1,9 @@
 /*
  * Empty Stylesheet file.
  */
-
+body{
+    -fx-background-color: #fff;
+}
 .footer-text{
      -fx-font-size: 15.0;
 }
@@ -12,4 +14,14 @@
 .jfx-date-picker > .jfx-text-field {
     -jfx-label-float: true;
     -fx-font-size: 16.0;
+}
+.dashboard-menu-icon{
+   -fx-background-repeat: no-repeat;
+  -fx-background-position: left;
+  -fx-background-size: 32px;
+  -fx-background-position: 20px
+}
+.button-products {
+  -fx-background-image: url('../../assets/product-60.png');
+
 }
