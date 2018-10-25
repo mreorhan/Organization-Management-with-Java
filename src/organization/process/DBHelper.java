@@ -79,7 +79,7 @@ public final class DBHelper {
         }
     }
     
-    public String[] _getDBData(String tableName,String columnName) throws Exception{
+    public String[] _getDBData(String tableName,String columnName){
         List<String> list = new ArrayList<String>();
         try {
             String sql;
