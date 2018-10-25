@@ -79,24 +79,29 @@ public final class DBHelper {
         }
     }
     
-    public String[] _getDBData(String tableName,String columnName) {
+    public String[] _getDBData(String tableName,String columnName) throws Exception{
         List<String> list = new ArrayList<String>();
         try {
             String sql;
             sql = "SELECT * FROM "+tableName;
             ResultSet rs = stmt.executeQuery(sql); 
             while (rs.next()) {
-               list.add(rs.getString(columnName));
+               list.add(rs.getString(2));
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Sorgu İşletilemedi: DBHelper._getDBData()");
         }
         String[] array= new String[list.size()];
-        for(int i=0;i<=list.size();i++){
-            array[i]=list.get(i);
-    }
+        for(int i=0,j=0;i<list.size();i++){
+            {
+                if(list.get(i) == null || list.get(i) == "")
+                    continue;
+                array[j]=list.get(i);
+                j++;
+            }
             
+    }    
         return array;
     }
 

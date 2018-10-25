@@ -31,7 +31,7 @@ public class OrganizationManagament extends Application {
         stage.setScene(scene);
         stage.show();
         
-        Calendar takvim = new GregorianCalendar(1984, 01, 01);
+        /*Calendar takvim = new GregorianCalendar(1984, 01, 01);
         Date tarih = takvim.getTime();
         
         Personnel p = new Personnel("Ahmet", "Sağlam", tarih);
@@ -59,6 +59,7 @@ public class OrganizationManagament extends Application {
         
         dp.test();
         dp.close();
+        */
         
     }
 

@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,16 +47,27 @@ public class Create_New_Employee_ScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO: çekilecek veriler aşağıdaki gibi eklenecek
-        DBHelper db = new DBHelper();
-        db.open();
-        System.out.println(db._getDBData("departmenttype","DepartmentName"));
+        ComboBoxLoad();
+    }
+
+    public void ComboBoxLoad() {
+            String[] array=null;
+            DBHelper db = new DBHelper();
+            db.open();
+            try{
+            array = db._getDBData("departmenttype", "DepartmentName");
+            }catch (Exception e){
+                System.out.println(e);
+                
+            }
+
+            //cb_department.getItems().addAll(db._getDBData("departmenttype","DepartmentName"));
+            db.close();
+            // TODO: çekilecek veriler -job-  aşağıdaki gibi eklenecek
+            cb_department.getItems().addAll(array);
+           
         
-       //cb_department.getItems().addAll(db._getDBData("departmenttype","DepartmentName"));
-        db.close();
-       // TODO: çekilecek veriler -job-  aşağıdaki gibi eklenecek
-       cb_job.getItems().add(new String("job1"));
-    }    
+    }
 
     @FXML
     private void signUp(MouseEvent event) {
@@ -63,5 +76,5 @@ public class Create_New_Employee_ScreenController implements Initializable {
     @FXML
     private void createEmployeeAction(ActionEvent event) {
     }
-    
+
 }
