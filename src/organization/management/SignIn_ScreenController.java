@@ -48,14 +48,12 @@ public class SignIn_ScreenController implements Initializable {
     @FXML
     private JFXButton btn_login;
     @FXML
-    private Label lbl_Message;
-    @FXML
     private AnchorPane panel;
     
     private CommonFunction fo=new CommonFunction();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+	
     }
     @FXML
     private void loginClickAction(ActionEvent event) {
@@ -66,10 +64,10 @@ public class SignIn_ScreenController implements Initializable {
         boolean user = db.UserControl(username, password);
          if(user){
             //Yeni formu açmak için kullanıyoruz
-        fo._show("Dashboard_Screen.fxml",panel);
+            fo._show("Dashboard_Screen.fxml",panel);
         }
         else {
-             lbl_Message.setText("Error");
+             fo._modal("Error","Username or password is wrong. Please try again.","OK",panel);
         }
         db.close();
     }

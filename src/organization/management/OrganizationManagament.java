@@ -14,7 +14,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -29,6 +31,14 @@ public class OrganizationManagament extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Software Company Management");
         stage.setScene(scene);
+        
+       stage.setMaxWidth(1380);
+       stage.setMaxHeight(775);
+       stage.setMinWidth(700);
+       stage.setMinHeight(400);
+      // scene.setFill(Color.TRANSPARENT);
+       //stage.initStyle(StageStyle.DECORATED);
+       //stage.initStyle(StageStyle.UNDECORATED);  
         stage.show();
         
         /*Calendar takvim = new GregorianCalendar(1984, 01, 01);

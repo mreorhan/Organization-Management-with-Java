@@ -6,12 +6,8 @@
 package organization.management;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTabPane;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -21,6 +17,21 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -56,13 +67,62 @@ public class Dashboard_ScreenController implements Initializable {
     @FXML
     private Tab settings;
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private JFXTreeTableView<User> treeView;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
 
+        // TREEVIEW BAŞLANGIÇ--------------------------------------------------------------
+        JFXTreeTableColumn<User, String> deptName = new JFXTreeTableColumn<>("Department");
+        deptName.setPrefWidth(150);
+        deptName.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().department;
+            }
+        });
+
+        JFXTreeTableColumn<User, String> ageCol = new JFXTreeTableColumn<>("Age");
+        ageCol.setPrefWidth(150);
+        ageCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().age;
+            }
+        });
+
+        JFXTreeTableColumn<User, String> nameCol = new JFXTreeTableColumn<>("Name");
+        nameCol.setPrefWidth(150);
+        nameCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<User, String> param) {
+                return param.getValue().getValue().userName;
+            }
+        });
+
+        ObservableList<User> users = FXCollections.observableArrayList();
+        users.add(new User("Computer Department", "23", "CD 1"));
+        users.add(new User("Sales Department", "22", "Employee 1"));
+        users.add(new User("Sales Department", "22", "Employee 2"));
+        users.add(new User("Sales Department", "25", "Employee 4"));
+        users.add(new User("Sales Department", "25", "Employee 5"));
+        users.add(new User("IT Department", "42", "ID 2"));
+        users.add(new User("HR Department", "22", "HR 1"));
+        users.add(new User("HR Department", "22", "HR 2"));
+
+        final TreeItem<User> root = new RecursiveTreeItem<User>(users, RecursiveTreeObject::getChildren);
+        treeView.getColumns().setAll(deptName, ageCol, nameCol);
+        treeView.setRoot(root);
+        treeView.setShowRoot(false);
+        
+        
+        // TREEVIEW SON--------------------------------------------------------------
+
+        
+        
+        
+        
         XYChart.Series series = new XYChart.Series();
         
         series.getData().add(new XYChart.Data("January",23));
@@ -82,6 +142,19 @@ public class Dashboard_ScreenController implements Initializable {
         lineChart.getData().addAll(series,series2);
     }    
 
+    class User extends RecursiveTreeObject<User> {
+
+        StringProperty userName;
+        StringProperty age;
+        StringProperty department;
+
+        public User(String department, String age, String userName) {
+            this.department = new SimpleStringProperty(department);
+            this.userName = new SimpleStringProperty(userName);
+            this.age = new SimpleStringProperty(age);
+        }
+
+    }
     @FXML
     private void onLogoutAction(ActionEvent event) {
         CommonFunction fo = new CommonFunction();

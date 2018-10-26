@@ -5,11 +5,16 @@
  */
 package organization.management;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,6 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -43,5 +50,28 @@ public static Date _formatDate(String string)throws ParseException{
         Date date = format.parse(string);
         return date;
 }
+public void _modal(String title,String description,String buttonString,AnchorPane panel){
+                     JFXDialogLayout content = new JFXDialogLayout();
+                    content.setHeading(new Text(title));
+	content.setBody(new Text(description));
+	content.setPrefSize(300, 100);
+	StackPane stackPane = new StackPane();
+	stackPane.autosize();
+	JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER, true);
+	JFXButton button = new JFXButton(buttonString);
+	button.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent event) {
+			dialog.close();
+		}
+	});
+	button.setButtonType(com.jfoenix.controls.JFXButton.ButtonType.RAISED);
+	button.setPrefHeight(32);
+	content.setActions(button);
+	panel.getChildren().add(stackPane);
+	AnchorPane.setTopAnchor(stackPane,140.0);
+	AnchorPane.setLeftAnchor(stackPane, 175.0);
+	dialog.show();
+    }
 
 }
