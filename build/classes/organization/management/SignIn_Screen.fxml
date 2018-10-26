@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="organization.management.SignIn_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.SignIn_ScreenController">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Sign In" textAlignment="CENTER" textFill="#616060" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
@@ -53,7 +53,7 @@
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_fotgotpassword" layoutX="279.0" layoutY="235.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
-      <JFXButton fx:id="btn_login" layoutX="454.0" layoutY="235.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Login" textFill="WHITE" />
+      <JFXButton fx:id="btn_fotgotpassword" layoutX="280.0" layoutY="233.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
+      <JFXButton fx:id="btn_login" layoutX="455.0" layoutY="233.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Login" textFill="WHITE" />
     </children>
 </AnchorPane>

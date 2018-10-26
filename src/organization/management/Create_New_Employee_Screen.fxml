@@ -9,27 +9,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" styleClass="body" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Create_New_Employee_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="450.0" prefWidth="700.0" styleClass="body" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Create_New_Employee_ScreenController">
      <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Create a new Employee" textAlignment="CENTER" textFill="#616060">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <JFXDatePicker fx:id="txt_recruitmentDate" defaultColor="#0073cf" layoutX="367.0" layoutY="173.0" prefHeight="38.0" prefWidth="190.0" promptText="Recruitment Date" />
-      <JFXTextField fx:id="txt_salary" focusColor="#0073cf" labelFloat="true" layoutX="144.0" layoutY="174.0" prefHeight="30.0" prefWidth="190.0" promptText="Salary">
+      <JFXComboBox fx:id="cb_department" labelFloat="true" layoutX="144.0" layoutY="117.0" prefHeight="38.0" prefWidth="190.0" promptText="Department" />
+      <JFXComboBox fx:id="cb_job" labelFloat="true" layoutX="367.0" layoutY="117.0" prefHeight="38.0" prefWidth="190.0" promptText="Job" />
+      <JFXTextField fx:id="txt_salary" focusColor="#0073cf" labelFloat="true" layoutX="144.0" layoutY="197.0" prefHeight="30.0" prefWidth="190.0" promptText="Salary">
          <font>
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btn_createEmployee" layoutX="281.0" layoutY="270.0" onAction="#createEmployeeAction" prefHeight="38.0" prefWidth="137.0" style="-fx-background-color: #0984e3;" text="Create Employee" textFill="WHITE" />
+      <JFXDatePicker fx:id="txt_recruitmentDate" defaultColor="#0073cf" layoutX="367.0" layoutY="196.0" prefHeight="38.0" prefWidth="190.0" promptText="Recruitment Date" />
+      <JFXButton fx:id="btn_createEmployee" layoutX="281.0" layoutY="272.0" onAction="#createEmployeeAction" prefHeight="38.0" prefWidth="137.0" style="-fx-background-color: #0984e3;" text="Create Employee" textFill="WHITE" />
       
       <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUp" styleClass="footer-text" stylesheets="@style.css" text="Sign Up" />
       <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />
       <Label alignment="CENTER_RIGHT" layoutX="600.0" layoutY="417.0" prefHeight="18.0" prefWidth="82.0" styleClass="footer-text" stylesheets="@style.css" text="2018 ©" textAlignment="RIGHT" />
       <Label fx:id="lbl_Message" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="18.0" prefWidth="700.0" style="color: red;" textAlignment="CENTER" />
-      <JFXComboBox fx:id="cb_department" labelFloat="true" layoutX="144.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Department" />
-      <JFXComboBox fx:id="cb_job" labelFloat="true" layoutX="367.0" layoutY="94.0" prefHeight="38.0" prefWidth="190.0" promptText="Job" />
     
 
     </children>

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.SignUp_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: fff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.SignUp_ScreenController">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="20.0" prefHeight="18.0" prefWidth="700.0" text="Sign Up" textAlignment="CENTER" textFill="#616060">
          <font>
@@ -37,7 +37,7 @@
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_signUp" layoutX="443.0" layoutY="314.0" onAction="#signUpEvent" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign Up" textFill="WHITE" />
+      <JFXButton fx:id="btn_signUp" layoutX="443.0" layoutY="324.0" onAction="#signUpEvent" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Sign Up" textFill="WHITE" />
       
       <Label fx:id="lbl_register" layoutX="16.0" layoutY="417.0" onMouseClicked="#signUp" styleClass="footer-text" stylesheets="@style.css" text="Sign In" />
       <Separator layoutX="14.0" layoutY="405.0" prefHeight="0.0" prefWidth="670.0" stylesheets="@style.css" />

@@ -3,7 +3,12 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -11,13 +16,23 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="728.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Dashboard_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="728.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Dashboard_ScreenController">
    <children>
       <BorderPane prefHeight="728.0" prefWidth="1366.0" styleClass="body" stylesheets="@style.css">
          <left>
             <VBox id="dashboard-menu" prefHeight="734.0" prefWidth="250.0" style="-fx-background-color: #0073cf;" styleClass="dashboard-menu-icon" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="0.0" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Products" textFill="WHITE">
+                  <JFXButton fx:id="dashboard_link" alignment="BASELINE_LEFT" onMouseClicked="#dashboard" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="dashboard-menu-button-padding" />
+                        <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-home" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="0.0" onMouseClicked="#products" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Products" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -26,28 +41,54 @@
                      </opaqueInsets>
                      <styleClass>
                         <String fx:value="dashboard-menu-icon" />
-                        <String fx:value="button-products" />
+                        <String fx:value="dash-button-products" />
                         <String fx:value="dashboard-menu-button-padding" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Meetings" textFill="WHITE">
+                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#meetings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Meetings" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <styleClass>
                         <String fx:value="dashboard-menu-button-padding" />
                         <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-meeting" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Marketing" textFill="WHITE">
+                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#marketing" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Marketing" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <styleClass>
                         <String fx:value="dashboard-menu-button-padding" />
                         <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-marketing" />
                      </styleClass>
                   </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#employee" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Employees" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="dashboard-menu-button-padding" />
+                        <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-employee" />
+                     </styleClass>
+                  </JFXButton>
+                  <BorderPane prefHeight="362.0" prefWidth="250.0">
+                     <bottom>
+                        <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#settings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Settings" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="dashboard-menu-button-padding" />
+                              <String fx:value="dashboard-menu-icon" />
+                              <String fx:value="dash-button-settings" />
+                           </styleClass>
+                        </JFXButton>
+                     </bottom>
+                  </BorderPane>
                </children>
             </VBox>
          </left>
@@ -66,12 +107,82 @@
                <right>
                   <Pane prefHeight="57.0" prefWidth="253.0" BorderPane.alignment="CENTER">
                      <children>
-                        <JFXButton layoutX="188.0" layoutY="6.0" onAction="#onLogoutAction" prefHeight="41.0" prefWidth="52.0" ripplerFill="#bdbdbd" style="-fx-border-radius: 50;" styleClass="dashboard-right-icon" />
+                        <JFXButton layoutX="188.0" layoutY="6.0" onAction="#onLogoutAction" prefHeight="41.0" prefWidth="52.0" ripplerFill="#bdbdbd" style="-fx-border-radius: 50;" styleClass="dashboard-right-icon" textFill="#f2f2f2">
+                           <font>
+                              <Font size="1.0" />
+                           </font></JFXButton>
                      </children>
                   </Pane>
                </right>
+               <center>
+                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="lbl_Title" alignment="BASELINE_LEFT" layoutX="13.0" layoutY="13.0" text="Dashboard" textFill="#e97a7d" textOverrun="CLIP">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </center>
             </BorderPane>
          </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <TabPane fx:id="tab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                      <Tab fx:id="dashboard" text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <LineChart fx:id="lineChart" layoutY="53.0" prefHeight="553.0" prefWidth="1116.0" styleClass="chart-series-line">
+                                       <xAxis>
+                                          <CategoryAxis side="BOTTOM" fx:id="x" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis fx:id="y" side="LEFT" />
+                                       </yAxis>
+                                    </LineChart>
+                                    <Label alignment="BASELINE_LEFT" layoutX="14.0" layoutY="14.0" text="Balance Sheet Records" textFill="#e97a7d" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="products" text="Untitled Tab 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab fx:id="meetings" text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab fx:id="marketing" text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab fx:id="employee" text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab fx:id="settings" text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </center>
+            </BorderPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

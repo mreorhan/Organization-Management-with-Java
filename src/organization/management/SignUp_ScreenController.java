@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import organization.process.*;
 
 /**
@@ -42,7 +43,11 @@ public class SignUp_ScreenController implements Initializable {
     private Label lbl_Message;
     @FXML
     private JFXButton btn_signUp;
+    @FXML
+    private AnchorPane panel;
 
+    
+      private  CommonFunction fo = new CommonFunction();
     /**
      * Initializes the controller class.
      */
@@ -57,15 +62,13 @@ public class SignUp_ScreenController implements Initializable {
 
     private void signIn(ActionEvent event) {
         //Yeni formu açmak için kullanıyoruz
-        CommonFunction fo = new CommonFunction();
-        fo._show("SignIn_Screen.fxml");
+        fo._show("SignIn_Screen.fxml",panel);
     }
 
     @FXML
     private void signUp(MouseEvent event) {
         //Yeni formu açmak için kullanıyoruz
-        CommonFunction fo = new CommonFunction();
-        fo._show("SignIn_Screen.fxml");
+        fo._show("SignIn_Screen.fxml",panel);
     }
 
     @FXML
@@ -75,9 +78,8 @@ public class SignUp_ScreenController implements Initializable {
         
         
         String string = txt_birthDay.getValue().toString();
-        CommonFunction fa = new CommonFunction();
 
-        Person p1 = new Person(txt_name.getText(), txt_lastName.getText(), fa._formatDate(string));
+        Person p1 = new Person(txt_name.getText(), txt_lastName.getText(), fo._formatDate(string));
         p1.setUsername(txt_username.getText());
         p1.setPassword(txt_password.getText());
 
@@ -86,7 +88,7 @@ public class SignUp_ScreenController implements Initializable {
             p1.setPersonID(db.ReturnID(p1));
             InstantData.person = p1;
             CommonFunction fo = new CommonFunction();
-            fo._show("Create_New_Employee_Screen.fxml");
+            fo._show("Create_New_Employee_Screen.fxml",panel);
         } else {
             System.out.println("insert not working ");
         }

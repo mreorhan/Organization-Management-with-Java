@@ -12,13 +12,12 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import organization.process.*;
 
 /**
@@ -43,6 +42,9 @@ public class Create_New_Employee_ScreenController implements Initializable {
     @FXML
     private JFXComboBox<String> cb_job;
 
+    private CommonFunction redirect = new CommonFunction();
+    @FXML
+    private AnchorPane panel;
     /**
      * Initializes the controller class.
      */
@@ -106,8 +108,7 @@ public class Create_New_Employee_ScreenController implements Initializable {
         if (!db.Insert(p1)) {
             System.out.println("Error: Personnel is not Created!");
         }
-        
-        System.out.println("Personnel is Created***");
+        redirect._show("SignIn_Screen.fxml", panel);
         db.close();
     }
 

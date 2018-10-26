@@ -1,5 +1,5 @@
 /*
- * Empty Stylesheet file.
+
  */
 .footer-text{
      -fx-font-size: 15.0;
@@ -25,17 +25,31 @@
 .dashboard-menu-icon{
    -fx-background-repeat: no-repeat;
   -fx-background-position: left;
-  -fx-background-size: 32px;
-  -fx-background-position: 10px;
+  -fx-background-size: 28px;
+  -fx-background-position: 12px;
  
 }
 .dashboard-menu-button-padding{
      -fx-padding:0 0 0 50px;
 }
-.button-products {
-  -fx-background-image: url('../../assets/product-60.png');
+.dash-button-products {
+  -fx-background-image: url('../../assets/projects-50.png');
 }
-
+.dash-button-employee {
+  -fx-background-image: url('../../assets/employee-50.png');
+}
+.dash-button-meeting {
+  -fx-background-image: url('../../assets/meeting-50.png');
+}
+.dash-button-marketing {
+  -fx-background-image: url('../../assets/marketing-50.png');
+}
+.dash-button-home {
+  -fx-background-image: url('../../assets/home-50.png');
+}
+.dash-button-settings {
+  -fx-background-image: url('../../assets/settings-50.png');
+}
 .body {
     -fx-background-color: #fff;
 }
@@ -45,4 +59,18 @@
   -fx-background-position: center;
   -fx-background-size: 32px;
   -fx-background-image: url('../../assets/logout-50.png');
+}
+.default-color0.chart-series-line { -fx-stroke: #7ae97d; }
+.default-color1.chart-series-line { -fx-stroke: #e97a7d; }
+.default-color2.chart-series-line { -fx-stroke: #dda0dd; }
+
+.chart-series-line {    
+    -fx-stroke-width: 5px;
+    -fx-effect: null;
+}
+.tab-pane {
+    -fx-tab-max-height: 0 ;
+} 
+.tab-pane .tab-header-area {
+    visibility: hidden ;
 }
