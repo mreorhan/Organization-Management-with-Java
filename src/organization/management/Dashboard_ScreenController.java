@@ -36,6 +36,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.util.Callback;
 import organization.process.DBHelper;
+import organization.process.InstantData;
 
 /**
  * FXML Controller class
@@ -73,12 +74,18 @@ public class Dashboard_ScreenController implements Initializable {
 
     @FXML
     private JFXTreeTableView<User> treeView;
+    @FXML
+    private Label lbl_user;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         
-
+       lbl_user.setText(InstantData.person.getName()+" "+InstantData.person.getLastName());
+        
+        
+       DBHelper db = new DBHelper();
+       //String[][] balanceSheet = db.SelectFromTable("balancesheet");
+        
         // TREEVIEW SON--------------------------------------------------------------
         XYChart.Series series = new XYChart.Series();
 
@@ -86,7 +93,7 @@ public class Dashboard_ScreenController implements Initializable {
         series.getData().add(new XYChart.Data("February", 14));
         series.getData().add(new XYChart.Data("March", 28));
         series.getData().add(new XYChart.Data("April", 25));
-        series.getData().add(new XYChart.Data("May", 23));
+        series.getData().add(new XYChart.Data("April", 23));
         series.setName("Income");
         XYChart.Series series2 = new XYChart.Series();
 
@@ -220,7 +227,6 @@ public class Dashboard_ScreenController implements Initializable {
         }
 
         User[] user = new User[persons.length];
-        System.out.println("LSAmals + "+persons.length);
         for (int i = 0; i < persons.length; i++) {
             Date date = null;
             
@@ -232,12 +238,11 @@ public class Dashboard_ScreenController implements Initializable {
 
             Calendar birthDay = Calendar.getInstance();
             birthDay.setTimeInMillis(date.getTime());
-            System.out.println("Gün Alma");
+            
             //create calendar object for current day
             long currentTime = System.currentTimeMillis();
             Calendar now = Calendar.getInstance();
             now.setTimeInMillis(currentTime);
-            System.out.println("Yıl Hesaplama");
             int years = now.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
            
             String pName = persons[i][1];
