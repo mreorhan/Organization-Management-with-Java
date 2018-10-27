@@ -66,6 +66,10 @@ public class SignIn_ScreenController implements Initializable {
         DBHelper db = new DBHelper();
         db.open();
         Person user = db.UserControl(username, password);
+         if (user == null) {
+            fo._modal("Error", "Username or password is wrong. Please try again.", "OK", panel);
+            return;
+        }
         InstantData.person = user;
 
         String[][] jobType = db.SelectFromTable("jobtype");
@@ -87,7 +91,6 @@ public class SignIn_ScreenController implements Initializable {
         }
         System.out.println("JobID: "+jobID+" Job: "+job);
         InstantData.personJobName=job;
-
         if (user != null) {
             //Yeni formu açmak için kullanıyoruz
             fo._show("Dashboard_Screen.fxml", panel);

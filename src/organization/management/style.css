@@ -94,3 +94,8 @@
     -fx-background-color: #0073cf;
     -fx-text-fill: white;
 }
+.button-default{
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-background-color:   #0984e3
+}

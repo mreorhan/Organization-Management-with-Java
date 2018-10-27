@@ -57,7 +57,7 @@ public void _modal(String title,String description,String buttonString,AnchorPan
 	content.setPrefSize(300, 100);
 	StackPane stackPane = new StackPane();
 	stackPane.autosize();
-	JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER, true);
+	JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.TOP);
 	JFXButton button = new JFXButton(buttonString);
 	button.setOnAction(new EventHandler<ActionEvent>() {
 		@Override

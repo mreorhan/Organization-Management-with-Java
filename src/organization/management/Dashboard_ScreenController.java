@@ -6,6 +6,11 @@
 package organization.management;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.scene.chart.CategoryAxis;
@@ -76,10 +81,26 @@ public class Dashboard_ScreenController implements Initializable {
     private JFXTreeTableView<User> treeView;
     @FXML
     private Label lbl_user;
+    @FXML
+    private JFXTextField txt_productName;
+    @FXML
+    private JFXTextArea ta_productDescription;
+    @FXML
+    private JFXDatePicker txt_productStartingDate;
+    @FXML
+    private JFXDatePicker txt_productDueDate;
+    @FXML
+    private JFXComboBox<?> cb_projectLeader;
+    @FXML
+    private JFXButton btn_createProduct;
+    @FXML
+    private JFXToggleButton chk_isActive;
+    @FXML
+    private Label lbl_job;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        lbl_job.setText(InstantData.personJobName);
         lbl_user.setText(InstantData.person.getName() + " " + InstantData.person.getLastName());
 
         DBHelper db = new DBHelper();
