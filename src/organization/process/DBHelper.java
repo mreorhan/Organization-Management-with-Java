@@ -8,6 +8,7 @@ package organization.process;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -28,8 +29,8 @@ public final class DBHelper {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
-    private  Connection conn = null;
-    private  Statement stmt = null;
+    private Connection conn = null;
+    private Statement stmt = null;
 
     public DBHelper() {
         try {
@@ -59,7 +60,7 @@ public final class DBHelper {
         }
     }
 
-     public void test() {
+    public void test() {
         try {
             String sql;
             sql = "SELECT * FROM person";
@@ -78,38 +79,82 @@ public final class DBHelper {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String[] _getDBData(String tableName){
+
+    public String[] _getDBData(String tableName) {
         List<String> list = new ArrayList<String>();
         try {
             String sql;
-            sql = "SELECT * FROM "+tableName;
-            ResultSet rs = stmt.executeQuery(sql); 
+            sql = "SELECT * FROM " + tableName;
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-               list.add(rs.getString(2));
+                list.add(rs.getString(2));
             }
             rs.close();
         } catch (SQLException ex) {
             System.out.println("Sorgu İşletilemedi: DBHelper._getDBData()");
         }
-        String[] array= new String[list.size()];
-        for(int i=0,j=0;i<list.size();i++){
+        String[] array = new String[list.size()];
+        for (int i = 0, j = 0; i < list.size(); i++) {
             {
-                if(list.get(i) == null || list.get(i) == "")
+                if (list.get(i) == null || list.get(i) == "") {
                     continue;
-                array[j]=list.get(i);
+                }
+                array[j] = list.get(i);
                 j++;
             }
-            
-    }    
+
+        }
         return array;
     }
 
+    public String[][] SelectFromTable(String tablename) {
+        String[][] table = null;
+        List<String> list = new ArrayList<String>();
+
+        try {
+            String sql;
+            sql = "SELECT * FROM " + tablename;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                list.add(rs.getString(1));
+            }
+
+            int rows = list.size();
+            System.out.println("Sorgu 1 bitti + rows:  "+rows);
+
+            sql = "SELECT * FROM " + tablename;
+            ResultSet rs2 = stmt.executeQuery(sql);
+            System.out.println("Sorgu 2");
+            ResultSetMetaData rsmd = rs2.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            System.out.println("Sorgu 2 bitti + columns:  " + columnsNumber);
+            table = new String[rows][columnsNumber];
+            System.out.println("Table yaratıldı");
+            int i = 0;
+            
+            while (rs2.next()) {
+
+                for (int j = 1,k=0; j <= columnsNumber; j++,k++) {
+                    table[i][k] = rs2.getString(j);
+                    System.out.println("Table Atama+ "+rs2.getString(j));
+                }
+                i++;
+            }
+            rs.close();
+            rs2.close();
+        } catch (SQLException ex) {
+            System.out.println("Sorgu İşletilemedi: DBHelper.SelectFromTable");
+        }
+
+        return table;
+    }
+
     public boolean Insert(Personnel p) {
-        
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String sorgu = "INSERT INTO Personnel (PersonnelID,DepartmentID,JobID,Salary,recruitmentDate) VALUES("
-                + p.getPersonID() + "," + p.getDepartmentID() + ","+p.getJobID()+"," + p.getSalary() + ",'" + df.format(p.getRecruitmentDate()) + "')";
+                + p.getPersonID() + "," + p.getDepartmentID() + "," + p.getJobID() + "," + p.getSalary() + ",'" + df.format(p.getRecruitmentDate()) + "')";
 
         try {
             stmt.executeUpdate(sorgu);
@@ -123,7 +168,7 @@ public final class DBHelper {
     public boolean Insert(Person p) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String sorgu = "INSERT INTO Person (Name,LastName,BirthDate,username,password) VALUES('" + p.getName() + "','" + p.getLastName() + "','"
-                + df.format(p.getBirthDate()) + "','"+p.getUsername()+"','"+p.getPassword()+"')";
+                + df.format(p.getBirthDate()) + "','" + p.getUsername() + "','" + p.getPassword() + "')";
         try {
             stmt.executeUpdate(sorgu);
         } catch (Exception e) {
@@ -143,7 +188,7 @@ public final class DBHelper {
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Display values
-                if (rs.getString(5).equals(p.getUsername()) ) {
+                if (rs.getString(5).equals(p.getUsername())) {
                     return rs.getInt(1);
                 }
 
@@ -156,19 +201,19 @@ public final class DBHelper {
 
         return -1;
     }
-    
-    public int ReturnID(String tableName,String findName) {
+
+    public int ReturnID(String tableName, String findName) {
         int i = 0;
         try {
 
             String sql;
-            sql = "SELECT * FROM "+ tableName;
+            sql = "SELECT * FROM " + tableName;
             ResultSet rs = stmt.executeQuery(sql); // DML
             // stmt.executeUpdate(sql); // DDL
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Display values
-                if (rs.getString(2).equals(findName) ) {
+                if (rs.getString(2).equals(findName)) {
                     return rs.getInt(1);
                 }
 
@@ -181,8 +226,8 @@ public final class DBHelper {
 
         return -1;
     }
-    
-    public  boolean UserControl(String username, String password){
+
+    public boolean UserControl(String username, String password) {
         try {
             String sql;
             sql = "SELECT * FROM person";
@@ -191,7 +236,7 @@ public final class DBHelper {
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Display values
-                if (rs.getString(5).equals(username) && rs.getString(6).equals(password) ) {
+                if (rs.getString(5).equals(username) && rs.getString(6).equals(password)) {
                     return true;
                 }
 
