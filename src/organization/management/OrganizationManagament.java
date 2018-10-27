@@ -26,6 +26,8 @@ public class OrganizationManagament extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+        InstantData.person = new Person("Emre", "ORHAN", new Date());
         Parent root = FXMLLoader.load(getClass().getResource("Dashboard_Screen.fxml"));
         
         Scene scene = new Scene(root);

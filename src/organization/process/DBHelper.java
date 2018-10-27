@@ -11,11 +11,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import organization.management.CommonFunction;
 
 /**
  *
@@ -121,23 +123,21 @@ public final class DBHelper {
             }
 
             int rows = list.size();
-            System.out.println("Sorgu 1 bitti + rows:  "+rows);
 
             sql = "SELECT * FROM " + tablename;
             ResultSet rs2 = stmt.executeQuery(sql);
-            System.out.println("Sorgu 2");
             ResultSetMetaData rsmd = rs2.getMetaData();
+            
             int columnsNumber = rsmd.getColumnCount();
-            System.out.println("Sorgu 2 bitti + columns:  " + columnsNumber);
+            
             table = new String[rows][columnsNumber];
-            System.out.println("Table yaratıldı");
+            
             int i = 0;
             
             while (rs2.next()) {
 
                 for (int j = 1,k=0; j <= columnsNumber; j++,k++) {
                     table[i][k] = rs2.getString(j);
-                    System.out.println("Table Atama+ "+rs2.getString(j));
                 }
                 i++;
             }
@@ -227,7 +227,8 @@ public final class DBHelper {
         return -1;
     }
 
-    public boolean UserControl(String username, String password) {
+    public Person UserControl(String username, String password) {
+        Person p1= null;
         try {
             String sql;
             sql = "SELECT * FROM person";
@@ -237,15 +238,19 @@ public final class DBHelper {
             while (rs.next()) {
                 //Display values
                 if (rs.getString(5).equals(username) && rs.getString(6).equals(password)) {
-                    return true;
+                    p1 = new Person(rs.getString(2), rs.getString(3),CommonFunction._formatDate(rs.getString(4)));
+                    p1.setPersonID(rs.getInt(1));
+                    p1.setUsername(username);
                 }
 
             }
             //STEP 6: Clean-up environment
             rs.close();
         } catch (SQLException ex) {
-            return false;
+            return null;
+        } catch (ParseException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return p1;
     }
 }

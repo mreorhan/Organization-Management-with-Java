@@ -96,7 +96,7 @@
          <top>
             <BorderPane prefHeight="42.0" prefWidth="250.0" BorderPane.alignment="CENTER">
                <left>
-                  <Label prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: #0073cf; -fx-padding: 15px;" text="Welcome" textFill="WHITE" BorderPane.alignment="CENTER">
+                  <Label fx:id="lbl_user" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: #0073cf; -fx-padding: 15px;" text="Welcome" textFill="WHITE" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
