@@ -64,6 +64,9 @@ public class SignIn_ScreenController implements Initializable {
         db.open();
         Person user = db.UserControl(username, password);
         InstantData.person=user;
+        
+        
+        
          if(user!=null){
             //Yeni formu açmak için kullanıyoruz
             fo._show("Dashboard_Screen.fxml",panel);
