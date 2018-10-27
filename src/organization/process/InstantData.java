@@ -11,5 +11,6 @@ package organization.process;
  */
 public class InstantData {
     public static Person person;
+    public static String personJobName;
     public static Personnel personnel; 
 }
