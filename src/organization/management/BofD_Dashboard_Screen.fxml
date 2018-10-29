@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -112,13 +114,13 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e51a4d" height="10.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" style="border-radius: 0;" width="1366.0" BorderPane.alignment="CENTER" />
                </top>
                <right>
-                  <Pane prefHeight="57.0" prefWidth="253.0" BorderPane.alignment="CENTER">
+                  <Pane prefHeight="57.0" prefWidth="253.0" style="-fx-background-color: fafafa;" BorderPane.alignment="CENTER">
                      <children>
                         <JFXButton layoutX="188.0" layoutY="6.0" onAction="#onLogoutAction" prefHeight="41.0" prefWidth="52.0" ripplerFill="#bdbdbd" style="-fx-border-radius: 50;" styleClass="dashboard-right-icon" textFill="#f2f2f2">
                            <font>
                               <Font size="1.0" />
                            </font></JFXButton>
-                        <Label fx:id="lbl_job" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-46.0" layoutY="14.0" prefHeight="27.0" prefWidth="222.0" style="-fx-font-weight: bold;" text="Dashboard" textAlignment="RIGHT" textFill="#e97a7d" textOverrun="CLIP">
+                        <Label fx:id="lbl_job" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-46.0" layoutY="14.0" prefHeight="27.0" prefWidth="222.0" style="-fx-font-weight: bold;" text="Board of Director" textAlignment="RIGHT" textFill="#e97a7d" textOverrun="CLIP">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -127,9 +129,9 @@
                   </Pane>
                </right>
                <center>
-                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: fafafa;" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="lbl_Title" alignment="BASELINE_LEFT" layoutX="13.0" layoutY="13.0" text="Dashboard" textFill="#e97a7d" textOverrun="CLIP">
+                        <Label fx:id="lbl_Title" alignment="BASELINE_LEFT" layoutX="13.0" layoutY="13.0" styleClass="dashboard-title" text="Dashboard" textFill="#393939" textOverrun="CLIP">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -148,7 +150,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <LineChart fx:id="lineChart" layoutY="53.0" prefHeight="553.0" prefWidth="1116.0" styleClass="chart-series-line">
+                                    <LineChart fx:id="lineChart" layoutX="22.0" layoutY="49.0" prefHeight="558.0" prefWidth="1070.0" styleClass="chart-series-line">
                                        <xAxis>
                                           <CategoryAxis side="BOTTOM" fx:id="x" />
                                        </xAxis>
@@ -156,7 +158,7 @@
                                           <NumberAxis fx:id="y" side="LEFT" />
                                        </yAxis>
                                     </LineChart>
-                                    <Label alignment="BASELINE_LEFT" layoutX="14.0" layoutY="14.0" text="Balance Sheet Records" textFill="#e97a7d" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Balance Sheet Records" textFill="#e97a7d" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -169,60 +171,101 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="28.0" text="Create New Product" textFill="#e97a7d" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Create New Product" textFill="#e97a7d" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                          <JFXTextField fx:id="txt_productName" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="76.0" prefHeight="38.0" prefWidth="300.0" promptText="Product Name">
+                                          <JFXTextField fx:id="txt_productName" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Product Name">
                                             <font>
                                                <Font size="16.0" />
                                             </font>
                                          </JFXTextField>
-                                    <JFXTextArea fx:id="ta_productDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="160.0" prefHeight="110.0" prefWidth="720.0" promptText="Product Description" wrapText="true">
+                                    <JFXDatePicker fx:id="txt_productStartingDate" defaultColor="#0073cf" layoutX="373.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Starting Date" showWeekNumbers="true" />
+                                    <JFXDatePicker fx:id="txt_productDueDate" defaultColor="#0073cf" layoutX="584.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Due Date" showWeekNumbers="true" />
+                                    <JFXComboBox fx:id="cb_projectLeader" editable="true" labelFloat="true" layoutX="801.0" layoutY="60.0" prefHeight="38.0" prefWidth="280.0" promptText="Product Leader" />
+                                    <JFXTextArea fx:id="ta_productDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="144.0" prefHeight="110.0" prefWidth="720.0" promptText="Product Description" wrapText="true">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXTextArea>
-                                    <JFXDatePicker fx:id="txt_productStartingDate" defaultColor="#0073cf" layoutX="373.0" layoutY="76.0" prefHeight="38.0" prefWidth="180.0" promptText="Starting Date" showWeekNumbers="true" />
-                                    <JFXDatePicker fx:id="txt_productDueDate" defaultColor="#0073cf" layoutX="584.0" layoutY="76.0" prefHeight="38.0" prefWidth="180.0" promptText="Due Date" showWeekNumbers="true" />
-                                    <JFXComboBox fx:id="cb_projectLeader" editable="true" labelFloat="true" layoutX="801.0" layoutY="76.0" prefHeight="38.0" prefWidth="280.0" promptText="Product Leader" />
-                                    <JFXButton fx:id="btn_createProduct" layoutX="880.0" layoutY="215.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
-                                    <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="316.0" text="All Products" textFill="#e97a7d" textOverrun="CLIP">
+                                    <JFXButton fx:id="btn_createProduct" layoutX="880.0" layoutY="199.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
+                                    <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="300.0" text="All Products" textFill="#e97a7d" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXToggleButton fx:id="chk_isActive" layoutX="869.0" layoutY="137.0" text="Is Active?" toggleColor="#0073cf">
+                                    <JFXToggleButton fx:id="chk_isActive" layoutX="869.0" layoutY="121.0" text="Is Active?" toggleColor="#0073cf">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXToggleButton>
-                                    <TreeView layoutX="41.0" layoutY="360.0" prefHeight="240.0" prefWidth="1040.0" />
+                                    <TreeView layoutX="40.0" layoutY="344.0" prefHeight="254.0" prefWidth="1040.0" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
                         <Tab fx:id="meetings" text="Untitled Tab 2">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Meetings (Coming Soon)" textFill="#e97a7d" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                         <Tab fx:id="marketing" text="Untitled Tab 2">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Marketings (Coming Soon)" textFill="#e97a7d" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                         <Tab fx:id="employee" text="Untitled Tab 2">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <JFXTreeTableView fx:id="treeView" prefHeight="632.0" prefWidth="1118.0" />
+                                    <JFXTreeTableView fx:id="treeView" layoutX="22.0" layoutY="56.0" prefHeight="570.0" prefWidth="1070.0" style="-fx-border-color: #ebebeb;">
+                                       <columnResizePolicy>
+                                          <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy></JFXTreeTableView>
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Employees" textFill="#e97a7d" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextField focusColor="#0073cf" layoutX="913.0" layoutY="11.0" prefHeight="26.0" prefWidth="178.0" promptText="Search Fiter" unFocusColor="WHITE" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>
                         <Tab fx:id="settings" text="Untitled Tab 2">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="User Settings" textFill="#e97a7d" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextField fx:id="txt_settings_username" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Username">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <JFXPasswordField fx:id="txt_settings_password" focusColor="#0073cf" labelFloat="true" layoutX="39.0" layoutY="127.0" prefHeight="30.0" prefWidth="302.0" promptText="Password">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXPasswordField>
+                                    <JFXButton fx:id="btn_settings_edit" layoutX="219.0" layoutY="184.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Edit" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                     </tabs>

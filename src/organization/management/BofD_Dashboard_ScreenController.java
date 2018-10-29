@@ -8,6 +8,7 @@ package organization.management;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
@@ -48,7 +49,7 @@ import organization.process.InstantData;
  *
  * @author Emre
  */
-public class Dashboard_ScreenController implements Initializable {
+public class BofD_Dashboard_ScreenController implements Initializable {
 
     @FXML
     private LineChart<?, ?> lineChart;
@@ -97,6 +98,12 @@ public class Dashboard_ScreenController implements Initializable {
     private JFXToggleButton chk_isActive;
     @FXML
     private Label lbl_job;
+    @FXML
+    private JFXTextField txt_settings_username;
+    @FXML
+    private JFXPasswordField txt_settings_password;
+    @FXML
+    private JFXButton btn_settings_edit;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

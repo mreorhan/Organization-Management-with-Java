@@ -1,14 +1,15 @@
 /*
-.tab-pane {
+
+ */
+ /*
+ asdasd
+ */
+ .tab-pane {
     -fx-tab-max-height: 0 ;
 } 
 .tab-pane .tab-header-area {
     visibility: hidden ;
 }
- */
- /*
- asdasd
- */
 .footer-text{
      -fx-font-size: 15.0;
 }
@@ -36,6 +37,10 @@
   -fx-background-size: 28px;
   -fx-background-position: 12px;
  
+}
+.dashboard-title{
+    font-size: 18px;
+    color: #393939;
 }
 .dashboard-menu-button-padding{
      -fx-padding:0 0 0 50px;
@@ -77,23 +82,7 @@
     -fx-effect: null;
 }
 
-/* Style for listview */
-.list-cell{
-   -fx-padding:15
-}
-.list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: #0073cf;
-    -fx-text-fill: white;
-}
 
-.list-cell:even {
-    -fx-background-color: white;
-}
-
-.list-cell:filled:hover {
-    -fx-background-color: #0073cf;
-    -fx-text-fill: white;
-}
 .button-default{
     -fx-font-size: 14;
     -fx-text-fill: white;
