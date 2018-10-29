@@ -91,11 +91,10 @@ public class SignIn_ScreenController implements Initializable {
         }
         System.out.println("JobID: "+jobID+" Job: "+job);
         InstantData.personJobName=job;
-        if (user != null) {
-            //Yeni formu açmak için kullanıyoruz
-            fo._show("Dashboard_Screen.fxml", panel);
-        } else {
-            fo._modal("Error", "Username or password is wrong. Please try again.", "OK", panel);
+        if ( InstantData.personJobName.equals("Accountant")) {
+            fo._show("Accountant_Dashboard_Screen.fxml", panel);
+        } else if  ( InstantData.personJobName.equals("Manager")) {
+            fo._show("BofD_Dashboard_Screen.fxml", panel);
         }
         db.close();
     }

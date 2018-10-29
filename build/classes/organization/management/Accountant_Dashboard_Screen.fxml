@@ -6,7 +6,6 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
@@ -25,7 +24,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="728.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.BofD_Dashboard_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="728.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.Accountant_Dashboard_ScreenController">
    <children>
       <BorderPane prefHeight="728.0" prefWidth="1366.0" styleClass="body" stylesheets="@style.css">
          <left>
@@ -41,7 +40,7 @@
                         <String fx:value="dash-button-home" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="0.0" onMouseClicked="#products" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Products" textFill="WHITE">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="0.0" onMouseClicked="#balance" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Balance Sheet" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -54,50 +53,30 @@
                         <String fx:value="dashboard-menu-button-padding" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#meetings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Meetings" textFill="WHITE">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="0.0" onMouseClicked="#fixture" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Fixture" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <styleClass>
+                        <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-products" />
+                        <String fx:value="dashboard-menu-button-padding" />
+                     </styleClass>
+                  </JFXButton>
+                  <BorderPane prefHeight="428.0" prefWidth="250.0" />
+                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#settings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Settings" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <styleClass>
                         <String fx:value="dashboard-menu-button-padding" />
                         <String fx:value="dashboard-menu-icon" />
-                        <String fx:value="dash-button-meeting" />
+                        <String fx:value="dash-button-settings" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#marketing" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Marketing" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="dashboard-menu-button-padding" />
-                        <String fx:value="dashboard-menu-icon" />
-                        <String fx:value="dash-button-marketing" />
-                     </styleClass>
-                  </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#employee" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Employees" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="dashboard-menu-button-padding" />
-                        <String fx:value="dashboard-menu-icon" />
-                        <String fx:value="dash-button-employee" />
-                     </styleClass>
-                  </JFXButton>
-                  <BorderPane prefHeight="362.0" prefWidth="250.0">
-                     <bottom>
-                        <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#settings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Settings" textFill="WHITE" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dashboard-menu-button-padding" />
-                              <String fx:value="dashboard-menu-icon" />
-                              <String fx:value="dash-button-settings" />
-                           </styleClass>
-                        </JFXButton>
-                     </bottom>
-                  </BorderPane>
                </children>
             </VBox>
          </left>
@@ -111,7 +90,7 @@
                   </Label>
                </left>
                <top>
-                  <Rectangle fill="#e6af2e" height="10.0" stroke="#e6af2e" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="0.0" style="border-radius: 0;" width="1366.0" BorderPane.alignment="CENTER" />
+                  <Rectangle fill="#632b30" height="10.0" stroke="#632b30" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeMiterLimit="0.0" width="1366.0" BorderPane.alignment="CENTER" />
                </top>
                <right>
                   <Pane prefHeight="57.0" prefWidth="253.0" style="-fx-background-color: fafafa;" BorderPane.alignment="CENTER">
@@ -120,7 +99,7 @@
                            <font>
                               <Font size="1.0" />
                            </font></JFXButton>
-                        <Label fx:id="lbl_job" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-46.0" layoutY="14.0" prefHeight="27.0" prefWidth="222.0" style="-fx-font-weight: bold;" text="Board of Director" textAlignment="RIGHT" textFill="#e6af2e" textOverrun="CLIP">
+                        <Label fx:id="lbl_job" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-46.0" layoutY="14.0" prefHeight="27.0" prefWidth="222.0" style="-fx-font-weight: bold;" text="Board of Director" textAlignment="RIGHT" textFill="#632b30" textOverrun="CLIP">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -158,7 +137,7 @@
                                           <NumberAxis fx:id="y" side="LEFT" />
                                        </yAxis>
                                     </LineChart>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Balance Sheet Records" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Balance Sheet Records" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -167,68 +146,43 @@
                               </AnchorPane>
                         </content>
                       </Tab>
-                      <Tab fx:id="products" text="Untitled Tab 2">
+                      <Tab fx:id="balance" text="Untitled Tab 2">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Create New Product" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Add New Income/Expense" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                          <JFXTextField fx:id="txt_productName" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Product Name">
+                                          <JFXTextField fx:id="txt_productName" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Title">
                                             <font>
                                                <Font size="16.0" />
                                             </font>
                                          </JFXTextField>
-                                    <JFXDatePicker fx:id="txt_productStartingDate" defaultColor="#0073cf" layoutX="373.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Starting Date" showWeekNumbers="true" />
-                                    <JFXDatePicker fx:id="txt_productDueDate" defaultColor="#0073cf" layoutX="584.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Due Date" showWeekNumbers="true" />
-                                    <JFXComboBox fx:id="cb_projectLeader" editable="true" labelFloat="true" layoutX="801.0" layoutY="60.0" prefHeight="38.0" prefWidth="280.0" promptText="Product Leader" />
-                                    <JFXTextArea fx:id="ta_productDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="144.0" prefHeight="110.0" prefWidth="720.0" promptText="Product Description" wrapText="true">
+                                    <JFXDatePicker fx:id="txt_productStartingDate" defaultColor="#0073cf" layoutX="373.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Date" showWeekNumbers="true" />
+                                    <JFXComboBox fx:id="cb_projectLeader" editable="true" labelFloat="true" layoutX="801.0" layoutY="60.0" prefHeight="38.0" prefWidth="280.0" promptText="Financial Type" />
+                                    <JFXTextArea fx:id="ta_productDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="144.0" prefHeight="110.0" prefWidth="720.0" promptText="Description" wrapText="true">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXTextArea>
-                                    <JFXButton fx:id="btn_createProduct" layoutX="880.0" layoutY="199.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
-                                    <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="300.0" text="All Products" textFill="#e6af2e" textOverrun="CLIP">
+                                    <JFXButton fx:id="btn_createProduct" layoutX="880.0" layoutY="180.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
+                                    <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="300.0" text="All Records" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXToggleButton fx:id="chk_isActive" layoutX="869.0" layoutY="121.0" text="Is Active?" toggleColor="#0073cf">
+                                    <TreeView layoutX="40.0" layoutY="344.0" prefHeight="254.0" prefWidth="1040.0" />
+                                    <JFXTextField fx:id="txt_productName1" focusColor="#0073cf" labelFloat="true" layoutX="560.0" layoutY="60.0" prefHeight="38.0" prefWidth="208.0" promptText="Amount">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
-                                    </JFXToggleButton>
-                                    <TreeView layoutX="40.0" layoutY="344.0" prefHeight="254.0" prefWidth="1040.0" />
+                                    </JFXTextField>
                                  </children></AnchorPane>
                         </content>
                       </Tab>
-                        <Tab fx:id="meetings" text="Untitled Tab 2">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Meetings (Coming Soon)" textFill="#e6af2e" textOverrun="CLIP">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children></AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab fx:id="marketing" text="Untitled Tab 2">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Marketings (Coming Soon)" textFill="#e6af2e" textOverrun="CLIP">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children></AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab fx:id="employee" text="Untitled Tab 2">
+                        <Tab fx:id="fixture" text="Untitled Tab 2">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -236,7 +190,7 @@
                                        <columnResizePolicy>
                                           <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy></JFXTreeTableView>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Employees" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Employees" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -249,7 +203,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="User Settings" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="User Settings" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

@@ -1,15 +1,15 @@
 /*
-
- */
- /*
- asdasd
- */
  .tab-pane {
     -fx-tab-max-height: 0 ;
 } 
 .tab-pane .tab-header-area {
     visibility: hidden ;
 }
+ */
+ /*
+ asdasd
+ */
+
 .footer-text{
      -fx-font-size: 15.0;
 }
@@ -41,7 +41,6 @@
 .dashboard-title{
     font-size: 18px;
     color: #393939;
-    font-weight: bold;
 }
 .dashboard-menu-button-padding{
      -fx-padding:0 0 0 50px;
