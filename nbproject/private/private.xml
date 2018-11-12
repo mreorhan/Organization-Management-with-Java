@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Company.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignUp_Screen.fxml</file>
+            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Dashboard_ScreenController.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/OrganizationManagament.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/style.css</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Create_New_Employee_Screen.fxml</file>

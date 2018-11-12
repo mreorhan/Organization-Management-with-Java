@@ -31,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,6 +108,15 @@ public class BofD_Dashboard_ScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        /*  Export Data Using Like That
+        CommonFunction fo = new CommonFunction();
+        try{
+        fo._exportData("deneme", "test.txt");
+        }catch(IOException e){
+            System.out.println(e);
+        }
+        */
         lbl_job.setText(InstantData.personJobName);
         lbl_user.setText(InstantData.person.getName() + " " + InstantData.person.getLastName());
 

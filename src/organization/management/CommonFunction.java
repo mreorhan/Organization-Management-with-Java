@@ -8,6 +8,9 @@ package organization.management;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,5 +76,23 @@ public void _modal(String title,String description,String buttonString,AnchorPan
 	AnchorPane.setLeftAnchor(stackPane, 175.0);
 	dialog.show();
     }
+
+public void _exportData(String data,String fileName) throws IOException{
+    String desktop = System.getProperty("user.home") + "/Desktop";
+    String path = desktop + "/" + fileName;
+    try{
+    File dataFile = new File(path);
+    dataFile.createNewFile();
+    FileWriter dataWriter = new FileWriter(dataFile);
+    
+    dataWriter.write(data);
+    dataWriter.flush();
+    dataWriter.close();
+    
+        System.err.println("This file created at "+path);
+    }catch(IOException e){
+        System.out.print("This file not created");
+    }
+}
 
 }
