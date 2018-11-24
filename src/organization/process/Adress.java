@@ -7,7 +7,7 @@ package organization.process;
 
 /**
  *
- * @author OGUZHAN
+ * @author Emre
  */
 public class Adress {
     private int postCode;

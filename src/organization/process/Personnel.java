@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author OGUZHAN
+ * @author Emre
  */
 public class Personnel extends Person{
     

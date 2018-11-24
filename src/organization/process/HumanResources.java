@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author OGUZHAN
+ * @author Emre
  */
 public class HumanResources {
     private ArrayList<Personnel> personnels;

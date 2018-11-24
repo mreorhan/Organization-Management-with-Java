@@ -35,15 +35,24 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Predicate;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 import organization.process.DBHelper;
 import organization.process.InstantData;
+import organization.process.Person;
+import organization.process.Product;
 
 /**
  * FXML Controller class
@@ -92,7 +101,7 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     @FXML
     private JFXDatePicker txt_productDueDate;
     @FXML
-    private JFXComboBox<?> cb_projectLeader;
+    private JFXComboBox<String> cb_projectLeader;
     @FXML
     private JFXButton btn_createProduct;
     @FXML
@@ -105,10 +114,19 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     private JFXPasswordField txt_settings_password;
     @FXML
     private JFXButton btn_settings_edit;
+    @FXML
+    private JFXTreeTableView<ProductClass> treeViewProducts;
+    @FXML
+    private JFXTextField filterProducts;
+    @FXML
+    private JFXTextField filterEmployees1;
 
+    private  CommonFunction fo = new CommonFunction();
+    
+    private  CommonFunction fo2 = new CommonFunction();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        ComboBoxLoad();
         /*  Export Data Using Like That
         CommonFunction fo = new CommonFunction();
         try{
@@ -160,6 +178,36 @@ public class BofD_Dashboard_ScreenController implements Initializable {
 
         db.close();
     }
+  public void ComboBoxLoad() {
+        String[] array_department = null;
+        DBHelper db = new DBHelper();
+        db.open();
+        array_department = db._getDBData("departmenttype");
+        db.close();
+        // TODO: çekilecek veriler -job-  aşağıdaki gibi eklenecek
+        cb_projectLeader.getItems().addAll(array_department);
+    }
+    @FXML
+    private void createProduct(MouseEvent event) throws ParseException {
+        //Products add section START
+        DBHelper db = new DBHelper();
+        db.open();
+        
+        String startDate = txt_productStartingDate.getValue().toString();
+        String dueDate = txt_productDueDate.getValue().toString();
+
+        Product product1 = new Product(txt_productName.getText(), ta_productDescription.getText(), fo._formatDate(startDate),InstantData.person.getName()+InstantData.person.getLastName(),cb_projectLeader.getValue().toString(),fo2._formatDate(dueDate),  chk_isActive.getId());
+        if (db.Insert(product1)) {
+            //Yeni formu açmak için kullanıyoruz
+            System.out.println("insert ok ");
+            getProductItems();
+        } else {
+            System.out.println("insert not working ");
+        }
+
+        db.close();
+         //Products add section END
+    }
 
     class User extends RecursiveTreeObject<User> {
 
@@ -181,6 +229,26 @@ public class BofD_Dashboard_ScreenController implements Initializable {
 
     }
 
+    class ProductClass extends RecursiveTreeObject<ProductClass> {
+
+        StringProperty productName;
+        StringProperty productDescription;
+        StringProperty productStartingDate;
+        StringProperty createdBy;
+        StringProperty projectLeader;
+        StringProperty productDueDate;
+        StringProperty isActive;
+         public ProductClass(String productName, String productDescription, String productStartingDate, String createdBy, String projectLeader, String productDueDate, String isActive) {
+            this.productName = new SimpleStringProperty(productName);
+            this.productDescription = new SimpleStringProperty(productDescription);
+            this.productStartingDate = new SimpleStringProperty(productStartingDate);
+            this.createdBy = new SimpleStringProperty(createdBy);
+            this.projectLeader = new SimpleStringProperty(projectLeader);
+            this.productDueDate = new SimpleStringProperty(productDueDate);
+            this.isActive = new SimpleStringProperty(isActive);
+        }
+
+    }
     @FXML
     private void onLogoutAction(ActionEvent event) {
         CommonFunction fo = new CommonFunction();
@@ -192,11 +260,177 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         tab.getSelectionModel().select(dashboard);
         lbl_Title.setText("Dashboard");
     }
+    public void getProductItems(){
+       //TreeView Başlangıç
+        JFXTreeTableColumn<ProductClass, String> productNameColumn = new JFXTreeTableColumn<>("Product Name");
+        productNameColumn.setPrefWidth(150);
+        productNameColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().productName;
+            }
+        });
 
+        JFXTreeTableColumn<ProductClass, String> productDescriptionColumn = new JFXTreeTableColumn<>("Product Description");
+        productDescriptionColumn.setPrefWidth(220);
+        productDescriptionColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().productDescription;
+            }
+        });
+
+        JFXTreeTableColumn<ProductClass, String> productStartingDateColumn = new JFXTreeTableColumn<>("Starting Date");
+        productStartingDateColumn.setPrefWidth(150);
+        productStartingDateColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().productStartingDate;
+            }
+        });
+
+        JFXTreeTableColumn<ProductClass, String> createdByColumn = new JFXTreeTableColumn<>("Created By");
+        createdByColumn.setPrefWidth(150);
+        createdByColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().createdBy;
+            }
+        });
+
+        JFXTreeTableColumn<ProductClass, String> projectLeaderColumn = new JFXTreeTableColumn<>("Project Leader");
+        projectLeaderColumn.setPrefWidth(150);
+        projectLeaderColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().projectLeader;
+            }
+        });
+
+        JFXTreeTableColumn<ProductClass, String> productDueDateColumn = new JFXTreeTableColumn<>("Product Due Date");
+        productDueDateColumn.setPrefWidth(150);
+        productDueDateColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().productDueDate;
+            }
+        });
+        
+        JFXTreeTableColumn<ProductClass, String> productisActiveColumn = new JFXTreeTableColumn<>("Is Active");
+        productisActiveColumn.setPrefWidth(80);
+        productisActiveColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProductClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<ProductClass, String> param) {
+                return param.getValue().getValue().isActive;
+            }
+        });
+
+        ObservableList<ProductClass> productsList2 = FXCollections.observableArrayList();
+        DBHelper db = new DBHelper();
+        db.open();
+        String[][] productsList = db.SelectFromTable("products"); // productsList tablosundan seçilir ve productsList arrayine atılır.
+
+        if (productsList.length == 0) {
+            System.out.println("Hata: Hiç Personel Bulunmamaktadır.");
+            return;
+        }
+
+        ProductClass[] productArray = new ProductClass[productsList.length];
+        for (int i = 0; i < productsList.length; i++) {
+            Date date = null;
+
+            try {
+                date = CommonFunction._formatDate(productsList[i][3]);
+            } catch (ParseException ex) {
+                System.out.println("Hatalı Çevirme: " + ex);
+            }
+
+            Calendar birthDay = Calendar.getInstance();
+            birthDay.setTimeInMillis(date.getTime());
+
+            //create calendar object for current day
+            Calendar now = Calendar.getInstance();
+
+            String pName = productsList[i][1];
+            String pLastName = productsList[i][2];
+            String pAge = productsList[i][3];
+            String pDept = productsList[i][4];
+            String personnelDept = productsList[i][5];
+            String personnelJob = productsList[i][6];
+            String isActive = productsList[i][7];
+            if(isActive=="0")
+                isActive="No";
+            else
+                isActive="Yes";
+            productArray[i] = new ProductClass(pName, pLastName, pAge,pDept, personnelDept, personnelJob,isActive);
+        }
+
+        for (int i = 0; i < productArray.length; i++) {
+            productsList2.add(productArray[i]);
+        }
+
+        final TreeItem<ProductClass> root = new RecursiveTreeItem<ProductClass>(productsList2, RecursiveTreeObject::getChildren);
+        treeViewProducts.getColumns().setAll(productNameColumn, productDescriptionColumn, productStartingDateColumn, createdByColumn, projectLeaderColumn, productDueDateColumn,productisActiveColumn);
+        treeViewProducts.setRoot(root);
+        treeViewProducts.setShowRoot(false);
+        
+        db.close();
+    
+           // Create ContextMenu
+        ContextMenu contextMenu = new ContextMenu();
+ 
+        MenuItem item1 = new MenuItem("Menu Item 1");
+        item1.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                lbl_Title.setText("Mark as Over");
+            }
+        });
+        MenuItem item2 = new MenuItem("Menu Item 2");
+        item2.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                lbl_Title.setText("Delete");
+            }
+        });
+ 
+        // Add MenuItem to ContextMenu
+        contextMenu.getItems().addAll(item1, item2);
+        
+        treeViewProducts.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+ 
+            @Override
+            public void handle(ContextMenuEvent event) {
+ 
+                contextMenu.show(treeViewProducts, event.getScreenX(), event.getScreenY());
+            }
+        });
+    }
+    
+    
+    
     @FXML
-    private void products(MouseEvent event) {
+    private void products(MouseEvent event) throws ParseException {
         tab.getSelectionModel().select(products);
         lbl_Title.setText("Products");
+        
+      getProductItems();
+        
+        
+        filterProducts.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                    treeViewProducts.setPredicate(new Predicate<TreeItem<ProductClass>>() {
+                        @Override
+                        public boolean test(TreeItem<ProductClass> t) {
+                          Boolean flag = t.getValue().productName.getValue().toLowerCase().contains(newValue) || t.getValue().productDescription.getValue().toLowerCase().contains(newValue)|| t.getValue().projectLeader.getValue().toLowerCase().contains(newValue);
+                          return flag;
+                        }
+                    });
+            }
+        });
     }
 
     @FXML
@@ -237,7 +471,6 @@ public class BofD_Dashboard_ScreenController implements Initializable {
                 return param.getValue().getValue().age;
             }
         });
-
         JFXTreeTableColumn<User, String> deptColumn = new JFXTreeTableColumn<>("Department");
         deptColumn.setPrefWidth(150);
         deptColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<User, String>, ObservableValue<String>>() {
@@ -339,6 +572,20 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         treeView.setShowRoot(false);
 
         db.close();
+        
+        
+        filterEmployees1.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                    treeView.setPredicate(new Predicate<TreeItem<User>>() {
+                        @Override
+                        public boolean test(TreeItem<User> t) {
+                          Boolean flag = t.getValue().name.getValue().toLowerCase().contains(newValue) || t.getValue().lastName.getValue().toLowerCase().contains(newValue)|| t.getValue().department.getValue().toLowerCase().contains(newValue);
+                          return flag;
+                        }
+                    });
+            }
+        });
     }
 
     @FXML

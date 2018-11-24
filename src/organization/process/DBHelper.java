@@ -151,7 +151,7 @@ public final class DBHelper {
     }
 
     public boolean Insert(Personnel p) {
-
+        
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String sorgu = "INSERT INTO Personnel (PersonnelID,DepartmentID,JobID,Salary,recruitmentDate) VALUES("
                 + p.getPersonID() + "," + p.getDepartmentID() + "," + p.getJobID() + "," + p.getSalary() + ",'" + df.format(p.getRecruitmentDate()) + "')";
@@ -252,5 +252,28 @@ public final class DBHelper {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return p1;
+    }
+
+    public boolean Insert(Product p) {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String sorgu = "INSERT INTO products (productName,productDescription,productStartingDate,createdBy,projectLeader,productDueDate,isActive) VALUES('" +
+                p.getProductName()+ "','" +
+                p.getProductDescription()+ "','"+ 
+                df.format(p.getProductStartingDate()) + "','" + 
+                p.getCreatedBy()+ "','" + 
+                p.getProjectLeader()+ "','" + 
+                df.format(p.getProductDueDate())+ "','" + 
+                "1"+
+                "')";
+        
+        try {
+            System.out.println(sorgu);
+            stmt.executeUpdate(sorgu);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 }
