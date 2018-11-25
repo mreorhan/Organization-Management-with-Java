@@ -52,7 +52,7 @@
             <Font size="16.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton fx:id="btn_fotgotpassword" layoutX="280.0" layoutY="233.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
+      <JFXButton fx:id="btn_fotgotpassword" layoutX="280.0" layoutY="233.0" onAction="#loginClickAction" onMouseClicked="#forgotPassword" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #0984e3;" text="Forgot Password" textFill="WHITE" />
       <JFXButton fx:id="btn_login" layoutX="455.0" layoutY="233.0" onAction="#loginClickAction" prefHeight="38.0" prefWidth="118.0" style="-fx-background-color: #0984e3;" text="Login" textFill="WHITE" />
     </children>
 </AnchorPane>

@@ -254,17 +254,18 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextField fx:id="txt_settings_username" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Username">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <JFXPasswordField fx:id="txt_settings_password" focusColor="#0073cf" labelFloat="true" layoutX="39.0" layoutY="127.0" prefHeight="30.0" prefWidth="302.0" promptText="Password">
+                                    <JFXPasswordField fx:id="txt_settings_password_again" focusColor="#0073cf" labelFloat="true" layoutX="39.0" layoutY="127.0" prefHeight="30.0" prefWidth="302.0" promptText="Password Again">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXPasswordField>
-                                    <JFXButton fx:id="btn_settings_edit" layoutX="219.0" layoutY="184.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Edit" />
+                                    <JFXButton fx:id="btn_settings_edit" layoutX="219.0" layoutY="184.0" onMouseClicked="#passwordUpdate" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Update" />
+                                    <JFXPasswordField fx:id="txt_settings_password" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="30.0" prefWidth="302.0" promptText="Password">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXPasswordField>
+                                    <Label fx:id="lbl_settings" layoutX="39.0" layoutY="248.0" textFill="RED" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>

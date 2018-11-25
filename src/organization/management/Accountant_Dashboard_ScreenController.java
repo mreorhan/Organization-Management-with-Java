@@ -81,8 +81,6 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     @FXML
     private Label lbl_job;
     @FXML
-    private JFXTextField txt_settings_username;
-    @FXML
     private JFXPasswordField txt_settings_password;
     @FXML
     private JFXButton btn_settings_edit;
@@ -102,6 +100,10 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     private JFXTextField txt_productName1;
     @FXML
     private Tab fixture;
+    @FXML
+    private JFXPasswordField txt_settings_password_again;
+    @FXML
+    private Label lbl_settings;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -153,12 +155,28 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     private void balance(MouseEvent event) {
         tab.getSelectionModel().select(balance);
         lbl_Title.setText("Balance");
+        
     }
 
     @FXML
     private void fixture(MouseEvent event) {
         tab.getSelectionModel().select(fixture);
         lbl_Title.setText("Fixture");
+    }
+
+    @FXML
+    private void passwordUpdate(MouseEvent event) {
+        String password1= txt_settings_password.getText();
+        String password2=txt_settings_password_again.getText();
+        System.out.println(password1+""+password2);
+        if(!password1.equals(password2))
+            lbl_settings.setText("Passwords must match!");
+        else{
+            DBHelper db = new DBHelper();
+            db.open();
+            lbl_settings.setText(db._getUpdateData(password1.toString(), 3));
+            db.close();
+        }
     }
 
     class User extends RecursiveTreeObject<User> {

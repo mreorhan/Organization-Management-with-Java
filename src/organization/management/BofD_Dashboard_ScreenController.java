@@ -109,8 +109,6 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     @FXML
     private Label lbl_job;
     @FXML
-    private JFXTextField txt_settings_username;
-    @FXML
     private JFXPasswordField txt_settings_password;
     @FXML
     private JFXButton btn_settings_edit;
@@ -124,6 +122,11 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     private  CommonFunction fo = new CommonFunction();
     
     private  CommonFunction fo2 = new CommonFunction();
+    private JFXPasswordField txt_settings_password_2;
+    @FXML
+    private Label lbl_settings;
+    @FXML
+    private JFXPasswordField txt_settings_password_again;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ComboBoxLoad();
@@ -182,7 +185,7 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         String[] array_department = null;
         DBHelper db = new DBHelper();
         db.open();
-        array_department = db._getDBData("departmenttype");
+        array_department = db._getDBData("personnel","inner JOIN person ON personnel.PersonnelID=person.PersonID INNER join departmenttype on personnel.DepartmentID=departmenttype.DepartmentID where departmenttype.DepartmentID=1",8);
         db.close();
         // TODO: çekilecek veriler -job-  aşağıdaki gibi eklenecek
         cb_projectLeader.getItems().addAll(array_department);
@@ -195,8 +198,13 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         
         String startDate = txt_productStartingDate.getValue().toString();
         String dueDate = txt_productDueDate.getValue().toString();
-
-        Product product1 = new Product(txt_productName.getText(), ta_productDescription.getText(), fo._formatDate(startDate),InstantData.person.getName()+InstantData.person.getLastName(),cb_projectLeader.getValue().toString(),fo2._formatDate(dueDate),  chk_isActive.getId());
+        String chk="0";
+        System.out.println(chk_isActive.isSelected());
+        if(chk_isActive.isSelected())
+            chk="1";
+        else
+            chk="0";
+        Product product1 = new Product(txt_productName.getText(), ta_productDescription.getText(), fo._formatDate(startDate),InstantData.person.getName()+InstantData.person.getLastName(),cb_projectLeader.getValue().toString(),fo2._formatDate(dueDate),  chk);
         if (db.Insert(product1)) {
             //Yeni formu açmak için kullanıyoruz
             System.out.println("insert ok ");
@@ -207,6 +215,21 @@ public class BofD_Dashboard_ScreenController implements Initializable {
 
         db.close();
          //Products add section END
+    }
+
+    @FXML
+    private void passwordUpdate(MouseEvent event) {
+        String password1= txt_settings_password.getText();
+        String password2=txt_settings_password_again.getText();
+        System.out.println(password1+""+password2);
+        if(!password1.equals(password2))
+            lbl_settings.setText("Passwords must match!");
+        else{
+            DBHelper db = new DBHelper();
+            db.open();
+            lbl_settings.setText(db._getUpdateData(password1.toString(), 3));
+            db.close();
+        }
     }
 
     class User extends RecursiveTreeObject<User> {
@@ -249,6 +272,7 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         }
 
     }
+         
     @FXML
     private void onLogoutAction(ActionEvent event) {
         CommonFunction fo = new CommonFunction();
@@ -358,11 +382,12 @@ public class BofD_Dashboard_ScreenController implements Initializable {
             String personnelDept = productsList[i][5];
             String personnelJob = productsList[i][6];
             String isActive = productsList[i][7];
-            if(isActive=="0")
-                isActive="No";
+            String x;
+            if(isActive.equals("0"))
+                x="No";
             else
-                isActive="Yes";
-            productArray[i] = new ProductClass(pName, pLastName, pAge,pDept, personnelDept, personnelJob,isActive);
+                x="Yes";
+            productArray[i] = new ProductClass(pName, pLastName, pAge,pDept, personnelDept, personnelJob,x);
         }
 
         for (int i = 0; i < productArray.length; i++) {
@@ -379,20 +404,20 @@ public class BofD_Dashboard_ScreenController implements Initializable {
            // Create ContextMenu
         ContextMenu contextMenu = new ContextMenu();
  
-        MenuItem item1 = new MenuItem("Menu Item 1");
+        MenuItem item1 = new MenuItem("Mark as Over");
         item1.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
-                lbl_Title.setText("Mark as Over");
+                //TODO: action for mark as over
             }
         });
-        MenuItem item2 = new MenuItem("Menu Item 2");
+        MenuItem item2 = new MenuItem("Delete");
         item2.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
-                lbl_Title.setText("Delete");
+                //TODO: action for delete
             }
         });
  
@@ -415,7 +440,6 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     private void products(MouseEvent event) throws ParseException {
         tab.getSelectionModel().select(products);
         lbl_Title.setText("Products");
-        
       getProductItems();
         
         

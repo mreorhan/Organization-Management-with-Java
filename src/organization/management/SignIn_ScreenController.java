@@ -96,12 +96,22 @@ public class SignIn_ScreenController implements Initializable {
         } else if  ( InstantData.personJobName.equals("Manager")) {
             fo._show("BofD_Dashboard_Screen.fxml", panel);
         }
+        else {
+         fo._modal("Error", "This user does not have an interface yet!", "OK", panel);
+            return;
+        }
         db.close();
     }
 
     @FXML
     private void signUpClick(MouseEvent event) {
         fo._show("SignUp_Screen.fxml", panel);
+    }
+
+    @FXML
+    private void forgotPassword(MouseEvent event) {
+        fo._modal("Info", "This panel is not using for now", "OK", panel);
+            return;
     }
 
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextArea?>
@@ -150,31 +149,30 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Add New Income/Expense" textFill="#632b30" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Add New Income-Expense" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                          <JFXTextField fx:id="txt_productName" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Title">
+                                          <JFXTextField fx:id="txt_income" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="210.0" promptText="Income">
                                             <font>
                                                <Font size="16.0" />
                                             </font>
                                          </JFXTextField>
-                                    <JFXDatePicker fx:id="txt_productStartingDate" defaultColor="#0073cf" layoutX="373.0" layoutY="60.0" prefHeight="38.0" prefWidth="180.0" promptText="Date" showWeekNumbers="true" />
-                                    <JFXComboBox fx:id="cb_projectLeader" editable="true" labelFloat="true" layoutX="801.0" layoutY="60.0" prefHeight="38.0" prefWidth="280.0" promptText="Financial Type" />
-                                    <JFXTextArea fx:id="ta_productDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="144.0" prefHeight="110.0" prefWidth="720.0" promptText="Description" wrapText="true">
+                                    <JFXDatePicker fx:id="txt_date" defaultColor="#0073cf" layoutX="509.0" layoutY="60.0" prefHeight="38.0" prefWidth="257.0" promptText="Date" showWeekNumbers="true" />
+                                    <JFXTextArea fx:id="ta_balanceDescription" focusColor="#0073cf" labelFloat="true" layoutX="41.0" layoutY="144.0" prefHeight="110.0" prefWidth="720.0" promptText="Description" wrapText="true">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXTextArea>
-                                    <JFXButton fx:id="btn_createProduct" layoutX="880.0" layoutY="180.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
+                                    <JFXButton fx:id="btn_create" layoutX="880.0" layoutY="144.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
                                     <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="300.0" text="All Records" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
                                     <TreeView layoutX="40.0" layoutY="344.0" prefHeight="254.0" prefWidth="1040.0" />
-                                    <JFXTextField fx:id="txt_productName1" focusColor="#0073cf" labelFloat="true" layoutX="560.0" layoutY="60.0" prefHeight="38.0" prefWidth="208.0" promptText="Amount">
+                                    <JFXTextField fx:id="txt_expense" focusColor="#0073cf" labelFloat="true" layoutX="276.0" layoutY="60.0" prefHeight="38.0" prefWidth="208.0" promptText="Expese">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -190,7 +188,7 @@
                                        <columnResizePolicy>
                                           <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy></JFXTreeTableView>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Employees" textFill="#632b30" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Fixture (Coming Soon)" textFill="#632b30" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -208,17 +206,18 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <JFXTextField fx:id="txt_settings_username" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="38.0" prefWidth="300.0" promptText="Username">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXTextField>
-                                    <JFXPasswordField fx:id="txt_settings_password" focusColor="#0073cf" labelFloat="true" layoutX="39.0" layoutY="127.0" prefHeight="30.0" prefWidth="302.0" promptText="Password">
+                                    <JFXPasswordField fx:id="txt_settings_password_again" focusColor="#0073cf" labelFloat="true" layoutX="39.0" layoutY="127.0" prefHeight="30.0" prefWidth="302.0" promptText="Password Again">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </JFXPasswordField>
-                                    <JFXButton fx:id="btn_settings_edit" layoutX="219.0" layoutY="184.0" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Edit" />
+                                    <JFXButton fx:id="btn_settings_edit" layoutX="219.0" layoutY="184.0" onMouseClicked="#passwordUpdate" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Update" />
+                                    <JFXPasswordField fx:id="txt_settings_password" focusColor="#0073cf" labelFloat="true" layoutX="40.0" layoutY="59.0" prefHeight="30.0" prefWidth="302.0" promptText="Password">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXPasswordField>
+                                    <Label fx:id="lbl_settings" layoutX="40.0" layoutY="238.0" textFill="RED" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>

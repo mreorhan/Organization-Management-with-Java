@@ -7,6 +7,7 @@ package organization.process;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import organization.management.CommonFunction;
+import sun.net.www.content.audio.x_aiff;
 
 /**
  *
@@ -108,7 +110,55 @@ public final class DBHelper {
         }
         return array;
     }
+     public String[] _getDBData(String tableName,String tableExtra,int column) {
+        List<String> list = new ArrayList<String>();
+        try {
+            String sql;
+            sql = "SELECT * FROM " + tableName+" "+tableExtra;
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                list.add(rs.getString(column));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println("Sorgu İşletilemedi: DBHelper._getDBData()");
+        }
+        String[] array = new String[list.size()];
+        for (int i = 0, j = 0; i < list.size(); i++) {
+            {
+                if (list.get(i) == null || list.get(i) == "") {
+                    continue;
+                }
+                array[j] = list.get(i);
+                j++;
+            }
 
+        }
+         System.out.println(array);
+        return array;
+    }
+     public String _getUpdateData(String password,int userId) {
+        try
+    {
+    
+      // create the java mysql update preparedstatement
+      String query = "update person set person.password=? where person.PersonID=?";
+      PreparedStatement preparedStmt = conn.prepareStatement(query);
+      preparedStmt.setString(1, password);
+      preparedStmt.setInt(2, userId);
+
+      // execute the java preparedstatement
+      preparedStmt.executeUpdate();
+      
+      conn.close();
+    }
+    catch (Exception e)
+    {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+        return "Your password changed!";
+    }
     public String[][] SelectFromTable(String tablename) {
         String[][] table = null;
         List<String> list = new ArrayList<String>();
@@ -264,7 +314,7 @@ public final class DBHelper {
                 p.getCreatedBy()+ "','" + 
                 p.getProjectLeader()+ "','" + 
                 df.format(p.getProductDueDate())+ "','" + 
-                "1"+
+                p.isIsActive()+
                 "')";
         
         try {
