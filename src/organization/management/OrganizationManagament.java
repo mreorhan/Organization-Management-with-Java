@@ -26,9 +26,9 @@ public class OrganizationManagament extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        
-        InstantData.person = new Person("Emre", "ORHAN", new Date());
-        Parent root = FXMLLoader.load(getClass().getResource("BofD_Dashboard_Screen.fxml"));
+        // Test hesabı için instance
+        //InstantData.person = new Person("Emre", "ORHAN", new Date());
+        Parent root = FXMLLoader.load(getClass().getResource("SignIn_Screen.fxml"));
         
         Scene scene = new Scene(root);
         stage.setTitle("Software Company Management");

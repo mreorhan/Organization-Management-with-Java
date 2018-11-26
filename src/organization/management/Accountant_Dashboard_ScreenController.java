@@ -11,9 +11,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.JFXTreeView;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -32,6 +32,7 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javafx.beans.value.ObservableValue;
@@ -40,10 +41,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeView;
 import javafx.util.Callback;
 import organization.process.DBHelper;
 import organization.process.InstantData;
-
+import organization.process.BalanceSheet;
 /**
  * FXML Controller class
  *
@@ -87,29 +89,28 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     @FXML
     private Tab balance;
     @FXML
-    private JFXTextField txt_productName;
-    @FXML
-    private JFXDatePicker txt_productStartingDate;
-    @FXML
-    private JFXComboBox<?> cb_projectLeader;
-    @FXML
-    private JFXTextArea ta_productDescription;
-    @FXML
-    private JFXButton btn_createProduct;
-    @FXML
-    private JFXTextField txt_productName1;
-    @FXML
     private Tab fixture;
     @FXML
     private JFXPasswordField txt_settings_password_again;
     @FXML
     private Label lbl_settings;
+    @FXML
+    private JFXTextField txt_income;
+    @FXML
+    private JFXDatePicker txt_date;
+    @FXML
+    private JFXTextArea ta_balanceDescription;
+    @FXML
+    private JFXButton btn_create;
+    @FXML
+    private JFXTextField txt_expense;
+    @FXML
+    private JFXTreeTableView<BalanceSheetClass> treeViewBalanceSheet;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lbl_job.setText(InstantData.personJobName);
         lbl_user.setText(InstantData.person.getName() + " " + InstantData.person.getLastName());
-
         DBHelper db = new DBHelper();
         db.open();
 
@@ -152,10 +153,124 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     }
 
     @FXML
+    private void createBalance(MouseEvent event) {
+        //Products add section START
+        DBHelper db = new DBHelper();
+        db.open();
+       long id =  InstantData.person.getPersonID();
+       int intID = (int) id;
+        int income = Integer.parseInt(txt_income.getText());
+        int expense = Integer.parseInt(txt_expense.getText());
+        String description = ta_balanceDescription.getText();
+        Date timeNow = Calendar.getInstance().getTime();
+        BalanceSheet balanceSheet1 = new BalanceSheet(intID,income,expense,timeNow,description);
+        if (db.Insert(balanceSheet1)) {
+            //Yeni formu açmak için kullanıyoruz
+            System.out.println("insert ok ");
+            getBalance();
+        } else {
+            System.out.println("insert not working ");
+        }
+
+        db.close();
+         //Products add section END
+    }
+        class BalanceSheetClass extends RecursiveTreeObject<BalanceSheetClass> {
+
+        StringProperty income;
+        StringProperty expense;
+        StringProperty date;
+        StringProperty description;
+         public BalanceSheetClass(String income, String expense, String date, String description) {
+            this.income = new SimpleStringProperty(income);
+            this.expense = new SimpleStringProperty(expense);
+            this.date = new SimpleStringProperty(date);
+            this.description = new SimpleStringProperty(description);
+        }
+
+    }
+         
+    public void getBalance(){
+    //TreeView Başlangıç
+        JFXTreeTableColumn<BalanceSheetClass, String> incomeColumn = new JFXTreeTableColumn<>("Income");
+        incomeColumn.setPrefWidth(150);
+        incomeColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BalanceSheetClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BalanceSheetClass, String> param) {
+                return param.getValue().getValue().income;
+            }
+        });
+
+        JFXTreeTableColumn<BalanceSheetClass, String> expenseColumn = new JFXTreeTableColumn<>("Expense");
+        expenseColumn.setPrefWidth(220);
+        expenseColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BalanceSheetClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BalanceSheetClass, String> param) {
+                return param.getValue().getValue().expense;
+            }
+        });
+
+        JFXTreeTableColumn<BalanceSheetClass, String> dateColumn = new JFXTreeTableColumn<>("Date");
+        dateColumn.setPrefWidth(150);
+        dateColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BalanceSheetClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BalanceSheetClass, String> param) {
+                return param.getValue().getValue().date;
+            }
+        });
+
+        JFXTreeTableColumn<BalanceSheetClass, String> descriptionColumn = new JFXTreeTableColumn<>("Description");
+        descriptionColumn.setPrefWidth(250);
+        descriptionColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<BalanceSheetClass, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<BalanceSheetClass, String> param) {
+                return param.getValue().getValue().description;
+            }
+        });
+
+        ObservableList<BalanceSheetClass> balanceSheetList = FXCollections.observableArrayList();
+        DBHelper db = new DBHelper();
+        db.open();
+        String[][] productsList = db.SelectFromTable("balancesheet"); // productsList tablosundan seçilir ve productsList arrayine atılır.
+
+        if (productsList.length == 0) {
+            System.out.println("Error: No data");
+            return;
+        }
+        
+        BalanceSheetClass[] productArray = new BalanceSheetClass[productsList.length];
+        for (int i = 0; i < productsList.length; i++) {
+            Date date = null;
+            try {
+                date = CommonFunction._formatDate(productsList[i][4]);
+                
+            } catch (ParseException ex) {
+                System.out.println("Hatalı Çevirme: " + ex);
+            }
+            String pIncome = productsList[i][2];
+            String pExpense = productsList[i][3];
+            String pDate = productsList[i][4];
+            String pDescription = productsList[i][5];
+            productArray[i] = new BalanceSheetClass(pIncome, pExpense, pDate,pDescription);
+        }
+
+        for (int i = 0; i < productArray.length; i++) {
+            balanceSheetList.add(productArray[i]);
+        }
+
+        final TreeItem<BalanceSheetClass> root = new RecursiveTreeItem<BalanceSheetClass>(balanceSheetList, RecursiveTreeObject::getChildren);
+        treeViewBalanceSheet.getColumns().setAll(incomeColumn, expenseColumn, dateColumn, descriptionColumn);
+        treeViewBalanceSheet.setRoot(root);
+        treeViewBalanceSheet.setShowRoot(false);
+        
+        db.close();
+    }
+
+    @FXML
     private void balance(MouseEvent event) {
         tab.getSelectionModel().select(balance);
         lbl_Title.setText("Balance");
-        
+        getBalance();
     }
 
     @FXML

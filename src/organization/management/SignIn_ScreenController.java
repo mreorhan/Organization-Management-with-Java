@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author OGUZHAN
+ * @author Emre
  */
 public class SignIn_ScreenController implements Initializable {
 

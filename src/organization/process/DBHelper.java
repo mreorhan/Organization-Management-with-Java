@@ -19,11 +19,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import organization.management.CommonFunction;
-import sun.net.www.content.audio.x_aiff;
 
 /**
  *
- * @author OGUZHAN and MREORHAN
+ * @author OGUZHAN and Emre
  */
 public final class DBHelper {
 
@@ -315,6 +314,25 @@ public final class DBHelper {
                 p.getProjectLeader()+ "','" + 
                 df.format(p.getProductDueDate())+ "','" + 
                 p.isIsActive()+
+                "')";
+        
+        try {
+            System.out.println(sorgu);
+            stmt.executeUpdate(sorgu);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+    public boolean Insert(BalanceSheet b) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String sorgu = "INSERT INTO balancesheet (createdBy,income,expense,date,description) VALUES('" +
+                b.getCreatedBy()+ "','" +
+                b.getIncome()+ "','"+ 
+                b.getExpense()+ "','"+ 
+                df.format(b.getDate()) + "','" + 
+                b.getDescription()+
                 "')";
         
         try {
