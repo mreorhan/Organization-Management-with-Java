@@ -24,7 +24,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="728.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="organization.management.BofD_Dashboard_ScreenController">
+<AnchorPane id="AnchorPane" fx:id="panel" prefHeight="728.0" prefWidth="1366.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="organization.management.BofD_Dashboard_ScreenController">
    <children>
       <BorderPane prefHeight="728.0" prefWidth="1366.0" styleClass="body" stylesheets="@style.css">
          <left>
@@ -63,16 +63,6 @@
                         <String fx:value="dash-button-meeting" />
                      </styleClass>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#marketing" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Marketing" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="dashboard-menu-button-padding" />
-                        <String fx:value="dashboard-menu-icon" />
-                        <String fx:value="dash-button-marketing" />
-                     </styleClass>
-                  </JFXButton>
                   <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#employee" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Employees" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
@@ -83,20 +73,17 @@
                         <String fx:value="dash-button-employee" />
                      </styleClass>
                   </JFXButton>
-                  <BorderPane prefHeight="362.0" prefWidth="250.0">
-                     <bottom>
-                        <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#settings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Settings" textFill="WHITE" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dashboard-menu-button-padding" />
-                              <String fx:value="dashboard-menu-icon" />
-                              <String fx:value="dash-button-settings" />
-                           </styleClass>
-                        </JFXButton>
-                     </bottom>
-                  </BorderPane>
+                  <BorderPane prefHeight="362.0" prefWidth="250.0" />
+                  <JFXButton alignment="BASELINE_LEFT" onMouseClicked="#settings" prefHeight="60.0" prefWidth="250.0" ripplerFill="#004577" stylesheets="@style.css" text="Settings" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="dashboard-menu-button-padding" />
+                        <String fx:value="dashboard-menu-icon" />
+                        <String fx:value="dash-button-settings" />
+                     </styleClass>
+                  </JFXButton>
                </children>
             </VBox>
          </left>
@@ -201,6 +188,7 @@
                                     </JFXToggleButton>
                                     <JFXTreeTableView fx:id="treeViewProducts" layoutX="41.0" layoutY="341.0" prefHeight="278.0" prefWidth="1049.0" />
                                     <JFXTextField fx:id="filterProducts" focusColor="#0073cf" layoutX="912.0" layoutY="302.0" prefHeight="26.0" prefWidth="178.0" promptText="Search Products" unFocusColor="WHITE" />
+                                    <JFXButton fx:id="exportAsProduct" layoutX="759.0" layoutY="303.0" onMouseClicked="#exportProducts" prefHeight="26.0" prefWidth="136.0" style="-fx-background-color: #4caf50;" text="Export as XLS" textFill="WHITE" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
@@ -208,23 +196,43 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Meetings (Coming Soon)" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Upcoming Meeting" textFill="#e6af2e" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                 </children></AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab fx:id="marketing" text="Untitled Tab 2">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="10.0" text="Marketings (Coming Soon)" textFill="#e6af2e" textOverrun="CLIP">
+                                    <Label fx:id="lblMeetingTitle" alignment="BASELINE_LEFT" layoutX="40.0" layoutY="53.0" text="Meeting Title" textFill="#2e2b23e0" textOverrun="CLIP">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="lblMeetingDesc" alignment="BASELINE_LEFT" layoutX="40.0" layoutY="96.0" text="Meeting desc" textFill="#2e2b23e0" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextField fx:id="txt_meetingTitle" focusColor="#0073cf" labelFloat="true" layoutX="44.0" layoutY="339.0" prefHeight="38.0" prefWidth="300.0" promptText="Meeting Title">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <Label alignment="BASELINE_LEFT" layoutX="40.0" layoutY="288.0" text="Create New Meeting" textFill="#e6af2e" textOverrun="CLIP">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextArea fx:id="ta_meetingDescription" focusColor="#0073cf" labelFloat="true" layoutX="379.0" layoutY="346.0" prefHeight="129.0" prefWidth="478.0" promptText="Product Description" wrapText="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXTextArea>
+                                    <JFXDatePicker fx:id="txt_meetingDate" defaultColor="#0073cf" layoutX="45.0" layoutY="437.0" prefHeight="38.0" prefWidth="298.0" promptText="Starting Date" showWeekNumbers="true" />
+                                    <Label fx:id="lblMeetingDate" alignment="BASELINE_LEFT" layoutX="949.0" layoutY="57.0" prefHeight="20.0" prefWidth="102.0" text="date" textAlignment="RIGHT" textFill="#ff2121" textOverrun="CLIP">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton fx:id="btn_createMeeting" layoutX="925.0" layoutY="390.0" onMouseClicked="#createMeeting" prefHeight="38.0" prefWidth="121.0" ripplerFill="#005392" styleClass="button-default" text="Create" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>

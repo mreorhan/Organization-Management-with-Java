@@ -32,6 +32,7 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,6 +52,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.util.Callback;
 import organization.process.DBHelper;
 import organization.process.InstantData;
+import organization.process.Meeting;
 import organization.process.Person;
 import organization.process.Product;
 
@@ -81,7 +83,6 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     private Label lbl_Title;
     @FXML
     private Tab meetings;
-    @FXML
     private Tab marketing;
     @FXML
     private Tab employee;
@@ -127,6 +128,22 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     private Label lbl_settings;
     @FXML
     private JFXPasswordField txt_settings_password_again;
+    @FXML
+    private JFXButton exportAsProduct;
+    @FXML
+    private Label lblMeetingTitle;
+    @FXML
+    private Label lblMeetingDesc;
+    @FXML
+    private JFXTextField txt_meetingTitle;
+    @FXML
+    private JFXTextArea ta_meetingDescription;
+    @FXML
+    private JFXDatePicker txt_meetingDate;
+    @FXML
+    private Label lblMeetingDate;
+    @FXML
+    private JFXButton btn_createMeeting;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ComboBoxLoad();
@@ -232,6 +249,36 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         }
     }
 
+    @FXML
+    private void exportProducts(MouseEvent event) throws IOException {
+        DBHelper db = new DBHelper();
+        db.open();
+           if( db._exportXMLData("products")==1)
+           {
+                fo._modal("Info", "The data was successfully exported.", "OK", panel);
+           }
+           else{
+            fo._modal("Error", "Something went wrong. Please try again.", "OK", panel);
+           }
+        db.close();
+    }
+
+    @FXML
+    private void createMeeting(MouseEvent event) throws ParseException {
+             //Meeting add section START
+        DBHelper db = new DBHelper();
+        db.open();
+        Meeting meeting = new Meeting(txt_meetingTitle.getText(), ta_meetingDescription.getText(), fo._formatDate(txt_meetingDate.getValue().toString()), (int) InstantData.person.getPersonID());
+        if (db.Insert(meeting)) {
+            fo._modal("Info", "The meeting was recorded successfully", "OK", panel);
+        } else {
+            fo._modal("Info", "Opps! Something went wrong", "OK", panel);
+        }
+
+        db.close();
+         //Meeting add section END
+    }
+
     class User extends RecursiveTreeObject<User> {
 
         StringProperty name;
@@ -253,7 +300,7 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     }
 
     class ProductClass extends RecursiveTreeObject<ProductClass> {
-
+         StringProperty pID;
         StringProperty productName;
         StringProperty productDescription;
         StringProperty productStartingDate;
@@ -262,7 +309,9 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         StringProperty productDueDate;
         StringProperty isActive;
          public ProductClass(String productName, String productDescription, String productStartingDate, String createdBy, String projectLeader, String productDueDate, String isActive) {
-            this.productName = new SimpleStringProperty(productName);
+            String pid= new String();
+             this.pID = new SimpleStringProperty(pid);
+             this.productName = new SimpleStringProperty(productName);
             this.productDescription = new SimpleStringProperty(productDescription);
             this.productStartingDate = new SimpleStringProperty(productStartingDate);
             this.createdBy = new SimpleStringProperty(createdBy);
@@ -374,7 +423,7 @@ public class BofD_Dashboard_ScreenController implements Initializable {
 
             //create calendar object for current day
             Calendar now = Calendar.getInstance();
-
+            String pID = productsList[i][0];
             String pName = productsList[i][1];
             String pLastName = productsList[i][2];
             String pAge = productsList[i][3];
@@ -414,10 +463,17 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         });
         MenuItem item2 = new MenuItem("Delete");
         item2.setOnAction(new EventHandler<ActionEvent>() {
- 
+            
             @Override
             public void handle(ActionEvent event) {
                 //TODO: action for delete
+               String x=  treeView.getSelectionModel().getSelectedItem().getParent().getValue().toString();
+                System.out.println("listid"+productsList[0][0] +"++"+ x);
+                DBHelper db = new DBHelper();
+                db.open();
+                db.Delete("products", "productID", 4);
+                db.close();
+                getProductItems();
             }
         });
  
@@ -457,7 +513,6 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         });
     }
 
-    @FXML
     private void marketing(MouseEvent event) {
         tab.getSelectionModel().select(marketing);
         lbl_Title.setText("Marketing");
@@ -613,9 +668,19 @@ public class BofD_Dashboard_ScreenController implements Initializable {
     }
 
     @FXML
-    private void meetings(MouseEvent event) {
+    private void meetings(MouseEvent event) throws ParseException, SQLException {
         tab.getSelectionModel().select(meetings);
         lbl_Title.setText("Meetings");
+        
+       String[] meeting = null;
+        DBHelper db = new DBHelper();
+        db.open();
+        meeting = db._getLastMeeting();
+        db.close();
+        
+        lblMeetingTitle.setText(meeting[0]);
+        lblMeetingDesc.setText(meeting[1]);
+        lblMeetingDate.setText(meeting[2]);
     }
 
     @FXML

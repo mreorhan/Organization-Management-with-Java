@@ -5,24 +5,26 @@
  */
 package organization.process;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.*;
 import organization.management.CommonFunction;
 
 /**
  *
- * @author OGUZHAN and Emre
+ * @author Emre
  */
 public final class DBHelper {
 
@@ -67,22 +69,35 @@ public final class DBHelper {
         try {
             String sql;
             sql = "SELECT * FROM person";
-            ResultSet rs = stmt.executeQuery(sql); // DML
-            // stmt.executeUpdate(sql); // DDL
+            ResultSet rs = stmt.executeQuery(sql); 
 
-            //STEP 5: Extract data from result set
             while (rs.next()) {
-                //Display values
                 System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6));
-
             }
-            //STEP 6: Clean-up environment
+            
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public String[] _getLastMeeting() {
+        ArrayList<String> array = new ArrayList<String>();
+        try {
+            String sql= "SELECT * FROM meeting WHERE id = (SELECT MAX(id) FROM meeting)";
+            ResultSet rs = stmt.executeQuery(sql); 
 
+            while (rs.next()) {
+             array.add(rs.getString(2));
+             array.add(rs.getString(3));
+             array.add(rs.getString(4));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+            return (String[]) array.toArray(new String[array.size()]);
+    }
     public String[] _getDBData(String tableName) {
         List<String> list = new ArrayList<String>();
         try {
@@ -199,6 +214,50 @@ public final class DBHelper {
         return table;
     }
 
+     public int _exportXMLData(String tableName) throws IOException {
+        try {
+            String sql= "SELECT * FROM products";
+           PreparedStatement preparedStmt = conn.prepareStatement(sql);
+           ResultSet rs = preparedStmt.executeQuery(sql);
+           
+            Workbook wb = new HSSFWorkbook();
+            Sheet sheet = wb.createSheet(tableName);
+            Row row = sheet.createRow(0);
+            row.createCell(0).setCellValue("id");
+            row.createCell(1).setCellValue("productName");
+            row.createCell(2).setCellValue("productDescription");
+            row.createCell(3).setCellValue("productStartingDate");
+            row.createCell(4).setCellValue("createdBy");
+            row.createCell(5).setCellValue("projectLeader");
+            row.createCell(6).setCellValue("productDueDate");
+            row.createCell(7).setCellValue("isActive");
+            
+            int index = 1;
+            while (rs.next()) {
+                Row row2 = sheet.createRow(index);
+                row2.createCell(0).setCellValue(rs.getString(1));
+                row2.createCell(1).setCellValue(rs.getString(2));
+                row2.createCell(2).setCellValue(rs.getString(3));
+                row2.createCell(3).setCellValue(rs.getString(4));
+                row2.createCell(4).setCellValue(rs.getString(5));
+                row2.createCell(5).setCellValue(rs.getString(6));
+                row2.createCell(6).setCellValue(rs.getString(7));
+                row2.createCell(7).setCellValue(rs.getString(8));
+                index++;
+            }
+            FileOutputStream fileOut = new FileOutputStream(tableName+".xls");
+            wb.write(fileOut);
+            fileOut.close();
+            preparedStmt.close();
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println("Sorgu İşletilemedi: DBHelper._getDBData()");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
+    }
+    
     public boolean Insert(Personnel p) {
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -281,17 +340,13 @@ public final class DBHelper {
         try {
             String sql;
             sql = "SELECT * FROM person";
-            ResultSet rs = stmt.executeQuery(sql); // DML
-            // stmt.executeUpdate(sql); // DDL
-            //STEP 5: Extract data from result set
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                //Display values
                 if (rs.getString(5).equals(username) && rs.getString(6).equals(password)) {
                     p1 = new Person(rs.getString(2), rs.getString(3),CommonFunction._formatDate(rs.getString(4)));
                     p1.setPersonID(rs.getInt(1));
                     p1.setUsername(username);
                 }
-
             }
             //STEP 6: Clean-up environment
             rs.close();
@@ -325,6 +380,21 @@ public final class DBHelper {
 
         return true;
     }
+    
+    public boolean Delete(String tableName,String where,int id){
+        String sql= "DELETE FROM " +tableName+ " where "+where+ "="+id;
+        System.out.println(sql);
+         try {
+            stmt.executeUpdate(sql);
+         }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
+    
     public boolean Insert(BalanceSheet b) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String sorgu = "INSERT INTO balancesheet (createdBy,income,expense,date,description) VALUES('" +
@@ -333,6 +403,25 @@ public final class DBHelper {
                 b.getExpense()+ "','"+ 
                 df.format(b.getDate()) + "','" + 
                 b.getDescription()+
+                "')";
+        
+        try {
+            System.out.println(sorgu);
+            stmt.executeUpdate(sorgu);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean Insert(Meeting m) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String sorgu = "INSERT INTO meeting (meetingTitle,meetingDescription,meetingDate,meetingCreatedBy) VALUES('" +
+                m.getMeetingTitle()+ "','" +
+                m.getMeetingDescription()+ "','"+ 
+                df.format(m.getMeetingDate())+ "','"+ 
+                m.getMeetingCreatedBy()+
                 "')";
         
         try {

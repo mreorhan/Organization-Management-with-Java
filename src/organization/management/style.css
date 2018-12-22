@@ -1,7 +1,4 @@
 /*
-
- */
- 
 .tab-pane {	
     -fx-tab-max-height: 0 ;	
 } 	
@@ -9,6 +6,9 @@
     visibility: hidden ;	
 }
  
+ */
+ 
+
 .footer-text{
      -fx-font-size: 15.0;
 }
@@ -61,6 +61,7 @@
 }
 .dash-button-settings {
   -fx-background-image: url('../../assets/settings-50.png');
+  margin-top: 40px
 }
 .body {
     -fx-background-color: #fff;

@@ -12,6 +12,7 @@
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Accountant_Dashboard_Screen.fxml</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignIn_Screen.fxml</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Product.java</file>
+            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Meeting.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignUp_ScreenController.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Accountant_Dashboard_ScreenController.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Personnel.java</file>
@@ -24,7 +25,6 @@
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/Create_New_Employee_ScreenController.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/Person.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/SignIn_ScreenController.java</file>
-            <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/BofD_Dashboard_Screen.fxml</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/HumanResources.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/management/CommonFunction.java</file>
             <file>file:/D:/Works/GitProjects/Organization-Management-with-Java/src/organization/process/InstantData.java</file>
