@@ -46,6 +46,7 @@ import javafx.util.Callback;
 import organization.process.DBHelper;
 import organization.process.InstantData;
 import organization.process.BalanceSheet;
+import organization.process.Meeting;
 /**
  * FXML Controller class
  *
@@ -76,7 +77,6 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     @FXML
     private Tab settings;
 
-    @FXML
     private JFXTreeTableView<User> treeView;
     @FXML
     private Label lbl_user;
@@ -88,7 +88,6 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     private JFXButton btn_settings_edit;
     @FXML
     private Tab balance;
-    @FXML
     private Tab fixture;
     @FXML
     private JFXPasswordField txt_settings_password_again;
@@ -106,7 +105,23 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
     private JFXTextField txt_expense;
     @FXML
     private JFXTreeTableView<BalanceSheetClass> treeViewBalanceSheet;
-
+    @FXML
+    private Label lblMeetingTitle;
+    @FXML
+    private Label lblMeetingDesc;
+    @FXML
+    private JFXTextField txt_meetingTitle;
+    @FXML
+    private JFXTextArea ta_meetingDescription;
+    @FXML
+    private JFXDatePicker txt_meetingDate;
+    @FXML
+    private Label lblMeetingDate;
+    @FXML
+    private JFXButton btn_createMeeting;
+    @FXML
+    private Tab meeting;
+ private  CommonFunction fo = new CommonFunction();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lbl_job.setText(InstantData.personJobName);
@@ -174,6 +189,37 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
 
         db.close();
          //Products add section END
+    }
+
+    @FXML
+    private void meeting(MouseEvent event) {
+        tab.getSelectionModel().select(meeting);
+        lbl_Title.setText("Meetings");
+         String[] meeting = null;
+        DBHelper db = new DBHelper();
+        db.open();
+        meeting = db._getLastMeeting();
+        db.close();
+        
+        lblMeetingTitle.setText(meeting[0]);
+        lblMeetingDesc.setText(meeting[1]);
+        lblMeetingDate.setText(meeting[2]);
+    }
+
+    @FXML
+    private void createNewMeeting(MouseEvent event) throws ParseException {
+        //Meeting add section START
+        DBHelper db = new DBHelper();
+        db.open();
+        Meeting meeting = new Meeting(txt_meetingTitle.getText(), ta_meetingDescription.getText(), fo._formatDate(txt_meetingDate.getValue().toString()), (int) InstantData.person.getPersonID());
+        if (db.Insert(meeting)) {
+            fo._modal("Info", "The meeting was recorded successfully", "OK", panel);
+        } else {
+            fo._modal("Info", "Opps! Something went wrong", "OK", panel);
+        }
+
+        db.close();
+         //Meeting add section END
     }
         class BalanceSheetClass extends RecursiveTreeObject<BalanceSheetClass> {
 
@@ -273,7 +319,6 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
         getBalance();
     }
 
-    @FXML
     private void fixture(MouseEvent event) {
         tab.getSelectionModel().select(fixture);
         lbl_Title.setText("Fixture");
@@ -286,6 +331,8 @@ public class Accountant_Dashboard_ScreenController implements Initializable {
         System.out.println(password1+""+password2);
         if(!password1.equals(password2))
             lbl_settings.setText("Passwords must match!");
+        else if(password1.equals("") ||password2.equals(""))
+            lbl_settings.setText("You must be fill required fields");
         else{
             DBHelper db = new DBHelper();
             db.open();

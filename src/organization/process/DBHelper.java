@@ -219,7 +219,6 @@ public final class DBHelper {
             String sql= "SELECT * FROM products";
            PreparedStatement preparedStmt = conn.prepareStatement(sql);
            ResultSet rs = preparedStmt.executeQuery(sql);
-           
             Workbook wb = new HSSFWorkbook();
             Sheet sheet = wb.createSheet(tableName);
             Row row = sheet.createRow(0);

@@ -43,6 +43,8 @@ public class Create_New_Employee_ScreenController implements Initializable {
     private JFXComboBox<String> cb_job;
 
     private CommonFunction redirect = new CommonFunction();
+    
+    private CommonFunction fo = new CommonFunction();
     @FXML
     private AnchorPane panel;
     /**
@@ -75,29 +77,36 @@ public class Create_New_Employee_ScreenController implements Initializable {
     private void createEmployeeAction(ActionEvent event) {
         DBHelper db = new DBHelper();
         db.open();
-        double salary = Double.parseDouble(txt_salary.getText());
-        String departmenTypeName = cb_department.getValue();
-        String jobTypeName = cb_job.getValue();
+        double salary = 0;
 
         String req = txt_recruitmentDate.getValue().toString();
         Date tarih = null;
 
         try {
-
             tarih = CommonFunction._formatDate(req);
         } catch (Exception e) {
-            System.out.println("Parse Exception");
+             fo._modal("Info", "You must be fill required (date) fields", "OK", panel);
         }
 
+        String departmenTypeName = cb_department.getValue();
+        String jobTypeName = cb_job.getValue();
         int departmentTypeID = db.ReturnID("departmenttype", departmenTypeName);
         int jobTypeID = db.ReturnID("jobtype", jobTypeName);
         int personID = db.ReturnID(InstantData.person);
 
         if (departmentTypeID == -1 || jobTypeID == -1) {
-            System.out.println("Personnel is not created");
+             fo._modal("Info", "You must be fill required (Department & Job) fields", "OK", panel);
             return;
         }
-
+        else if(txt_salary.equals(""))
+        {
+             fo._modal("Info", "You must be fill required (Salary) fields", "OK", panel);
+            return;
+        }
+        else{
+            
+        salary=Double.parseDouble(txt_salary.getText());
+        
         Personnel p1 = new Personnel("", "", tarih);
         p1.setDepartmentID(departmentTypeID);
         p1.setJobID(jobTypeID);
@@ -109,6 +118,7 @@ public class Create_New_Employee_ScreenController implements Initializable {
             System.out.println("Error: Personnel is not Created!");
         }
         redirect._show("SignIn_Screen.fxml", panel);
+        }
         db.close();
     }
 

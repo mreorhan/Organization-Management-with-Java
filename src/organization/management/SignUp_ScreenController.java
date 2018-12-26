@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +58,7 @@ public class SignUp_ScreenController implements Initializable {
     }
 
     private void signUpClickAction(ActionEvent event) throws ParseException {
-
+        System.out.println("organization.management.SignUp_ScreenController.signUpClickAction()");
     }
 
     private void signIn(ActionEvent event) {
@@ -75,14 +76,20 @@ public class SignUp_ScreenController implements Initializable {
     private void signUpEvent(ActionEvent event) throws ParseException {
         DBHelper db = new DBHelper();
         db.open();
-        
-        
-        String string = txt_birthDay.getValue().toString();
-
-        Person p1 = new Person(txt_name.getText(), txt_lastName.getText(), fo._formatDate(string));
+         String string =LocalDate.now().toString();
+         txt_birthDay.setValue(LocalDate.now());
+            
+       
+        if(txt_username.getText().equals("") || txt_name.getText().equals("") || txt_lastName.getText().equals("") ||txt_password.getText().equals(""))
+        {
+            fo._modal("Info", "You need to fill required fields", "ok", panel);
+            return;
+        }
+        else{
+         
+       Person p1 = new Person(txt_name.getText(), txt_lastName.getText(), fo._formatDate(string));
         p1.setUsername(txt_username.getText());
         p1.setPassword(txt_password.getText());
-
         if (db.Insert(p1)) {
             //Yeni formu açmak için kullanıyoruz
             p1.setPersonID(db.ReturnID(p1));
@@ -92,7 +99,7 @@ public class SignUp_ScreenController implements Initializable {
         } else {
             System.out.println("insert not working ");
         }
-
+        }
         db.close();
     }
 

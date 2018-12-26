@@ -241,6 +241,8 @@ public class BofD_Dashboard_ScreenController implements Initializable {
         System.out.println(password1+""+password2);
         if(!password1.equals(password2))
             lbl_settings.setText("Passwords must match!");
+        else if(password1.equals("") ||password2.equals(""))
+            lbl_settings.setText("You must be fill required fields");
         else{
             DBHelper db = new DBHelper();
             db.open();
